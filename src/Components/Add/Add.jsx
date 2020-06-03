@@ -7,6 +7,7 @@ import data from '../data';
 import { Link } from 'react-router-dom';
 export default function Add({ isLoggedin }) {
     const [values, setValues] = React.useState({
+        id: Math.random(),
         name: '',
         description: '',
         author: '',
@@ -32,7 +33,6 @@ export default function Add({ isLoggedin }) {
             image: "",
             postedBy: 'Laxman Bhusal'
         }
-
         setValues(empty)
     }
     return (

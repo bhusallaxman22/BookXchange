@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -14,8 +14,8 @@ import WriteIcon from "@material-ui/icons/EditOutlined";
 import PostedIcon from "@material-ui/icons/PersonOutlineTwoTone";
 import data from '../data';
 import Variants from '../Profile/Variant';
-import AppBarred from '../AppBar/AppBarred';
 import { Divider } from '@material-ui/core';
+import AppBarHome from '../AppBar/AppBarHome';
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
@@ -31,19 +31,31 @@ const useStyles = makeStyles({
 });
 
 
-export default function Home({ isLoggedin }) {
+export default function Home({ isLoggedin, datas, Cart, Wish, addToCart, addToWish, setCart, setWish }) {
     const classes = useStyles();
-    const [datas, setdata] = useState([])
-    useEffect(() => {
-        setdata(data);
-        console.log("effect")
-    }, [])
+    // const [datas, setdata] = useState([]);
+    // const [Cart, setCart] = useState([]);
+    // const [Wish, setWish] = useState([])
+    // useEffect(() => {
+    //     setdata(data);
+    // }, [datas])
+    // const addToCart = (data) => {
+    //     const newCart = [...Cart, data];
+    //     setCart(newCart)
+    //     console.log(newCart)
+    // }
+    // const addToWish = data => {
+    //     const newWish = [...Wish, data];
+    //     setWish(newWish);
+    //     console.log(newWish);
+    // }
+
 
     return (
         <Box>
 
             <Box>
-                <AppBarred isLoggedin={isLoggedin} />
+                <AppBarHome isLoggedin={isLoggedin} Cart={Cart} Wish={Wish} setCart={setCart} setWish={setWish} />
                 <Grid className="main-content"
                     container
                     direction="row"
@@ -84,10 +96,10 @@ export default function Home({ isLoggedin }) {
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
-                                    <Button size="medium" color="primary">
+                                    <Button size="medium" onClick={() => addToCart(data)} color="primary">
                                         Add To Cart
                 </Button>
-                                    <Button size="medium" color="primary">
+                                    <Button size="medium" onClick={() => addToWish(data)} color="primary">
                                         Add To Wishlist
                 </Button>
                                 </CardActions>

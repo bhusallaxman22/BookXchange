@@ -14,14 +14,32 @@ import SignUp from '../Components/Login/SignUp';
 import { ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
 import MyBooks from '../Components/Profile/myBooks';
 import Edit from '../Components/Profile/Edit';
+import data from '../Components/data'
 function App() {
   const [darkState, setDarkState] = useState(false);
   const [isLoggedin, setLogin] = useState(false);
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
   const mainSecondaryColor = darkState ? deepOrange[900] : deepPurple[500];
+
+  // FOR HOME.JSX
+  const [datas, setdata] = useState([]);
+  const [Cart, setCart] = useState([]);
+  const [Wish, setWish] = useState([])
+
+  const addToCart = (data) => {
+    const newCart = [...Cart, data];
+    setCart(newCart)
+    console.log(newCart)
+  }
+  const addToWish = data => {
+    const newWish = [...Wish, data];
+    setWish(newWish);
+    console.log(newWish);
+  }
   useEffect(() => {
     var aaa = localStorage.getItem("dark");
+    setdata(data);
     console.log("darkmode state from localStorage:", aaa)
     aaa === null ? aaa = false : setDarkState(JSON.parse(aaa))
   }, [])
@@ -47,21 +65,31 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home isLoggedin={isLoggedin} setLogin={setLogin} />
+            <Home
+              isLoggedin={isLoggedin}
+              setLogin={setLogin}
+              datas={datas}
+              Cart={Cart}
+              Wish={Wish}
+              addToCart={addToCart}
+              addToWish={addToWish}
+              setCart={setCart}
+              setWish={setWish}
+            />
           </Route>
-          <Route path="/profile" >
+          <Route path="/profile">
             <Profile darkState={darkState} handleThemeChange={handleThemeChange} isLoggedin={isLoggedin} setLogin={setLogin} />
           </Route>
-          <Route path="/add" >
+          <Route path="/add">
             <Add isLoggedin={isLoggedin} setLogin={setLogin} />
           </Route>
           <Route path="/login">
             <Login isLoggedin={isLoggedin} setLogin={setLogin} />
           </Route>
-          <Route path="/signup" >
+          <Route path="/signup">
             <SignUp isLoggedin={isLoggedin} setLogin={setLogin} />
           </Route>
-          <Route path="/myBooks" >
+          <Route path="/myBooks">
             <MyBooks />
           </Route>
           <Route path="/edit" >
