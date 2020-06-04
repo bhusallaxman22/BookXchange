@@ -25,13 +25,13 @@ code {
   justify-content: center;
   overflow: hidden;
 }
-.inner-content{
+.inner-content {
   height: 90vh;
   overflow: auto;
 }
 @media (max-width: 500px) {
   .main-content {
-    height: 83vh;
+    height: 86.3vh;
     overflow: auto;
     bottom: 0px;
   }

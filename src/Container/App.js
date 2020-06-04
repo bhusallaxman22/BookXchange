@@ -18,6 +18,7 @@ import data from '../Components/data'
 function App() {
   const [darkState, setDarkState] = useState(false);
   const [isLoggedin, setLogin] = useState(false);
+  const [SearchField, setSearchField] = useState('');
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
   const mainSecondaryColor = darkState ? deepOrange[900] : deepPurple[500];
@@ -54,7 +55,9 @@ function App() {
       }
     }
   });
-
+  const filteredBooks = datas.filter(book => {
+    return book.name.toLowerCase().includes(SearchField.toLowerCase())
+  });
   const handleThemeChange = () => {
     setDarkState(!darkState);
     localStorage.setItem("dark", !darkState);
@@ -68,13 +71,14 @@ function App() {
             <Home
               isLoggedin={isLoggedin}
               setLogin={setLogin}
-              datas={datas}
+              datas={filteredBooks}
               Cart={Cart}
               Wish={Wish}
               addToCart={addToCart}
               addToWish={addToWish}
               setCart={setCart}
               setWish={setWish}
+              setSearchField={setSearchField}
             />
           </Route>
           <Route path="/profile">
@@ -100,5 +104,4 @@ function App() {
     </ThemeProvider>
   );
 }
-
 export default App;

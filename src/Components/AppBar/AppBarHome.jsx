@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom'
 import { ShoppingCartRounded, Favorite } from '@material-ui/icons'
 import CartShow from '../Cart/CartShow';
 import WishShow from '../Cart/WishShow';
-export default function AppBarHome({ isLoggedin, Cart, Wish, setCart, setWish }) {
+export default function AppBarHome({
+    isLoggedin,
+    Cart,
+    Wish,
+    setCart,
+    setWish,
+}) {
     const [open, setOpen] = React.useState(false);
     const [openWish, setOpenWish] = React.useState(false);
 
@@ -29,7 +35,6 @@ export default function AppBarHome({ isLoggedin, Cart, Wish, setCart, setWish })
                     <Typography variant="h6" style={{ flexGrow: 1 }}>
                         <Link style={{ textDecoration: 'none', textAnchor: 'unset', color: "inherit" }} to={"/"}>   Bookstore(IMJC)</Link>
                     </Typography>
-
                     <IconButton aria-label="show shopping items" color="inherit" onClick={handleOpen}>
                         <Badge badgeContent={Cart.length} color="secondary">
                             <ShoppingCartRounded />
