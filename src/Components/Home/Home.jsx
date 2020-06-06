@@ -61,6 +61,7 @@ export default function Home({
     let optValue;
     const handleCategory = dat => {
         setCategory(optValue);
+        setPage(1)
         console.log("Category:", dat, "\nDatas:", filteredResults)
     }
     const handleCount = (event, value) => {
@@ -166,7 +167,7 @@ export default function Home({
                         />
                         <Divider orientation="vertical" flexItem />
                         <FormControl>
-                            <InputLabel>Books</InputLabel>
+                            <InputLabel>Number</InputLabel>
                             <Select
                                 labelId="show-book-opt"
                                 label='No'
@@ -179,7 +180,7 @@ export default function Home({
                                 <MenuItem value={10}>10</MenuItem>
 
                             </Select>
-                            <FormHelperText>Number of books per page</FormHelperText>
+                            <FormHelperText>books per page</FormHelperText>
                         </FormControl>
                     </div>
                 </Box>
