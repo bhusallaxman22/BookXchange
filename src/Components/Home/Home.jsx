@@ -10,13 +10,15 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Navigation from '../Navigation/Navigation';
 import Grid from '@material-ui/core/Grid';
+import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
 import WriteIcon from "@material-ui/icons/EditOutlined";
 import PostedIcon from "@material-ui/icons/PersonOutlineTwoTone";
-import data from '../data';
+import { Pagination } from "@material-ui/lab";
 import Variants from '../Profile/Variant';
-import { Divider, Container } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 import AppBarHome from '../AppBar/AppBarHome';
 import SearchBox from '../SearchBox/SearchBox';
+// import data from "../data";
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
@@ -40,13 +42,32 @@ export default function Home({
     addToCart,
     addToWish,
     setCart,
+    unique,
     setWish,
-    setSearchField
+    setSearchField,
+    setCategory,
+    filteredResults
 }) {
-    // const [disableCart, setdisableCart] = React.useState(false);
-    // const [disableWish, setdisableWish] = React.useState(false)
-
     const classes = useStyles();
+    const [Page, setPage] = React.useState(1)
+    const [bookCount, setbookCount] = React.useState(4)
+    function paginateGood(array, page_size, page_number) {
+        // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+        return array.slice((page_number - 1) * page_size, page_number * page_size);
+    }
+    const handlePageChange = (event, value) => {
+        setPage(value)
+    };
+    let optValue;
+    const handleCategory = dat => {
+        setCategory(optValue);
+        console.log("Category:", dat, "\nDatas:", filteredResults)
+    }
+    const handleCount = (event, value) => {
+        setbookCount(event.target.value);
+
+    }
+    const count = Math.ceil(datas.length / bookCount)
     return (
         <Box>
             <Box>
@@ -58,19 +79,41 @@ export default function Home({
                     setWish={setWish}
                     setSearchField={setSearchField}
                 />
-                <Container className="main-content">
-                    <SearchBox setSearchField={setSearchField} />
+                <Box className="main-content">
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'row'
+                    }}>
+                        <SearchBox setSearchField={setSearchField} />
+                        <Divider orientation="vertical" flexItem />
+                        <FormControl variant="filled">
+                            <InputLabel id="genre0-select-label">Genre</InputLabel>
+                            <Select
+                                labelId="genre-select-opt"
+                                label='Category'
+                                id="genre-select"
+                                onChange={handleCategory}
+                            >
+                                <MenuItem
+                                    onClick={() => optValue = 'All'} value={'All'}>All</MenuItem>
+                                {unique.sort().map(dat => <MenuItem
+                                    onClick={() => optValue = dat} value={dat}>{dat}</MenuItem>)}
+                            </Select>
+                            <FormHelperText>Select Genre.</FormHelperText>
+                        </FormControl>
+
+                    </div>
                     <Grid
                         container
                         direction="row"
                         justify="center"
                         alignItems="center" >
-                        {!data.length ? (
+                        {!datas.length ? (
                             <Box>
                                 <Variants />
                             </Box>
                         ) : (
-                                datas.map(data => <Card key={data.id} className={classes.root}>
+                                paginateGood(datas, bookCount, Page).map(data => <Card key={data.id} className={classes.root}>
                                     <CardActionArea>
                                         <CardMedia
                                             className={classes.media}
@@ -109,8 +152,37 @@ export default function Home({
                                     </CardActions>
                                 </Card>
                                 ))}
-                    </Grid>
-                </Container>
+                    </Grid><br />
+                    <div
+                        style={{ alignContent: 'center', textAlign: 'center', display: 'flex', justifyContent: 'center' }}
+
+                    >
+                        <Pagination
+                            count={count}
+                            onChange={handlePageChange}
+                            showFirstButton
+                            showLastButton
+                            color="primary"
+                        />
+                        <Divider orientation="vertical" flexItem />
+                        <FormControl>
+                            <InputLabel>Books</InputLabel>
+                            <Select
+                                labelId="show-book-opt"
+                                label='No'
+                                id="count-select"
+                                onChange={handleCount}
+                            >
+                                <MenuItem value={4}>4</MenuItem>
+                                <MenuItem value={6}>6</MenuItem>
+                                <MenuItem value={8}>8</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
+
+                            </Select>
+                            <FormHelperText>Number of books per page</FormHelperText>
+                        </FormControl>
+                    </div>
+                </Box>
             </Box>
             < Navigation />
         </Box>

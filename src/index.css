@@ -12,7 +12,7 @@ code {
     monospace;
 }
 .main-content {
-  height: 84vh;
+  height: 86vh;
   overflow: auto;
   bottom: 0px;
 }
@@ -23,7 +23,6 @@ code {
   bottom: 0;
   margin-bottom: 0px;
   justify-content: center;
-  overflow: hidden;
 }
 .inner-content {
   height: 90vh;

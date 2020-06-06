@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import {
   orange,
   blue,
@@ -10,14 +10,16 @@ import Home from '../Components/Home/Home';
 import Profile from '../Components/Profile/Profile';
 import Add from '../Components/Add/Add';
 import Login from '../Components/Login/Login';
+import books from '../Components/data';
 import SignUp from '../Components/Login/SignUp';
 import { ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
 import MyBooks from '../Components/Profile/myBooks';
 import Edit from '../Components/Profile/Edit';
-import data from '../Components/data'
+import _ from "lodash";
+// import data from '../Components/data'
 function App() {
   const [darkState, setDarkState] = useState(false);
-  const [isLoggedin, setLogin] = useState(false);
+  const [isLoggedin, setLogin] = useState(true);
   const [SearchField, setSearchField] = useState('');
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
@@ -27,6 +29,23 @@ function App() {
   const [datas, setdata] = useState([]);
   const [Cart, setCart] = useState([]);
   const [Wish, setWish] = useState([])
+  const [category, setCategory] = useState('All')
+
+  const unique =    _.chain(datas).map('genre').flatten().uniq().value()
+  // unique.push('All')
+  const filteredResult = datas.filter((item) =>
+      category==='All'?datas: (item.genre.indexOf(category) >= 0)
+  );
+  useEffect(() => {
+    var aaa = localStorage.getItem("dark");
+    // fetch('/datas')
+    //   .then(res => res.json())
+    //   .then(books => setdata(books))
+    //   .catch(err => console.log(err))
+    setdata(books);
+    console.log("darkmode state from localStorage:", aaa)
+    aaa === null ? aaa = false : setDarkState(JSON.parse(aaa))
+  }, [])
 
   const addToCart = (data) => {
     const newCart = [...Cart, data];
@@ -38,12 +57,7 @@ function App() {
     setWish(newWish);
     console.log(newWish);
   }
-  useEffect(() => {
-    var aaa = localStorage.getItem("dark");
-    setdata(data);
-    console.log("darkmode state from localStorage:", aaa)
-    aaa === null ? aaa = false : setDarkState(JSON.parse(aaa))
-  }, [])
+
   const darkTheme = createMuiTheme({
     palette: {
       type: palletType,
@@ -55,9 +69,9 @@ function App() {
       }
     }
   });
-  const filteredBooks = datas.filter(book => {
+  const filteredBooks = filteredResult.filter(book => {
     return book.name.toLowerCase().includes(SearchField.toLowerCase())
-  });
+  })
   const handleThemeChange = () => {
     setDarkState(!darkState);
     localStorage.setItem("dark", !darkState);
@@ -73,12 +87,15 @@ function App() {
               setLogin={setLogin}
               datas={filteredBooks}
               Cart={Cart}
+              unique={unique}
               Wish={Wish}
               addToCart={addToCart}
               addToWish={addToWish}
               setCart={setCart}
               setWish={setWish}
+              setCategory={setCategory}
               setSearchField={setSearchField}
+              filteredResults={filteredResult}
             />
           </Route>
           <Route path="/profile">

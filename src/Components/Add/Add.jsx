@@ -3,11 +3,12 @@ import Navigation from '../Navigation/Navigation';
 import Box from "@material-ui/core/Box";
 import AppBarred from '../AppBar/AppBarred';
 import { Typography, Grid, TextField, Button, FormControl, InputAdornment, Container } from '@material-ui/core';
-import data from '../data';
-import { Link } from 'react-router-dom';
+// import data from '../data';
+import { Link, useHistory } from 'react-router-dom';
+import Tags from "./Tag";
 export default function Add({ isLoggedin }) {
+    const history = useHistory();
     const [values, setValues] = React.useState({
-        id: Math.random(),
         name: '',
         description: '',
         author: '',
@@ -19,21 +20,41 @@ export default function Add({ isLoggedin }) {
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(values);
-        data.push(values);
-        const empty =
-        {
+        // const { name, description, author, originalPrice, discountedPrice, image, postedBy } = values;
+        // const data = {
+        //     name,
+        //     description,
+        //     author,
+        //     originalPrice,
+        //     discountedPrice,
+        //     image,
+        //     postedBy
+        // }
+        const empty = {
             name: '',
             description: '',
-            author: '',
+            author: "",
             originalPrice: '',
             discountedPrice: '',
-            image: "",
+            image: '',
+            tegs: [],
             postedBy: 'Laxman Bhusal'
         }
-        setValues(empty)
+        // await fetch('http://localhost:5000/datas', {
+        //     method: "POST",
+        //     body: JSON.stringify(data),
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        // })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+        //     .catch(err => console.log(err))
+        history.push("/");
+        setValues(empty);
     }
     return (
         <Box >
@@ -49,11 +70,15 @@ export default function Add({ isLoggedin }) {
                         alignItems="center"
                         justify="center"
                     >
-                        <form onSubmit={handleSubmit}>
+                        <form
+                            //  method="post" action="/datas"
+                            onSubmit={event => handleSubmit(event)}
+                        >
                             <FormControl><TextField
                                 label="Book Name"
                                 variant="outlined"
                                 type="text"
+                                name="name"
                                 required
                                 value={values.name}
                                 onChange={handleChange('name')}
@@ -65,6 +90,7 @@ export default function Add({ isLoggedin }) {
                             <FormControl><TextField
                                 label="Author"
                                 variant="outlined"
+                                name="author"
                                 value={values.author}
                                 onChange={handleChange('author')}
                                 type="text"
@@ -78,6 +104,7 @@ export default function Add({ isLoggedin }) {
                             <FormControl><TextField
                                 label="Description"
                                 variant="outlined"
+                                name="description"
                                 value={values.description}
                                 onChange={handleChange('description')}
                                 multiline
@@ -95,6 +122,7 @@ export default function Add({ isLoggedin }) {
                                 value={values.originalPrice}
                                 onChange={handleChange('originalPrice')}
                                 type="number"
+                                name="originalPrice"
                                 required
                                 lang="en"
                                 fullWidth
@@ -112,6 +140,7 @@ export default function Add({ isLoggedin }) {
                                 label="Price"
                                 variant="outlined"
                                 type="number"
+                                name="discountedPrice"
                                 required
                                 value={values.discountedPrice}
                                 onChange={handleChange('discountedPrice')}
@@ -127,11 +156,14 @@ export default function Add({ isLoggedin }) {
                                 }}
                             /></FormControl>
                             <br />
+                            <Tags />
+
                             <Typography component="strong" variant="subtitle2" >
                                 Image:
                             </Typography>
                             <input
                                 accept="image/*"
+                                name="image"
                                 style={{ display: 'none' }}
                                 id="contained-button-file"
                                 type="file"

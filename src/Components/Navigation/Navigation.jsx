@@ -40,7 +40,7 @@ export default function Navigation() {
         className={classes.root}
       >
         <BottomNavigationAction onClick={handleClickNav} value="home" component={Link} to="/" label="Home" icon={<HomeIcon />} />
-        <Fab color="secondary" onClick={handleClickNav} className={classes.fabButton}>
+        <Fab color="primary" onClick={handleClickNav} className={classes.fabButton}>
           <BottomNavigationAction showLabel value="add" component={Link} label="" to={"/add"} icon={<AddIcon />} />
         </Fab>
         <BottomNavigationAction onClick={handleClickNav} value="profile" component={Link} to="/profile" label="Profile" icon={<ProfileIcon />} />
