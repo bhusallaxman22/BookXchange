@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import { Delete } from '@material-ui/icons';
+
 // import { Delete } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +34,9 @@ export default function WishShow({ open, handleClose, cart, setCart }) {
         setCart([])
         console.log("cleared the carrt")
     }
+    const handleDelete = (itemToDelete) => () => {
+        setCart((cart) => cart.filter((cart) => cart.id !== itemToDelete.id));
+    };
     const classes = useStyles();
     return (
         <div>
@@ -56,7 +61,10 @@ export default function WishShow({ open, handleClose, cart, setCart }) {
                     {cart.map(item =>
                         <section key={item.id * Math.random()}>
                             <ListItem button>
-                                <ListItemText primary={`Book: ${item.name}`} secondary={`Author: ${item.author} \n| Price: ${item.discountedPrice}`} />
+                                <ListItemText primary={`Book: ${item.name}`} secondary={`Author: ${item.author.author} \n| Price: ${item.discountedPrice}`} />
+                                <IconButton onClick={handleDelete(item)}>
+                                    <Delete />
+                                </IconButton>
                             </ListItem>
                             <Divider />
                         </section>

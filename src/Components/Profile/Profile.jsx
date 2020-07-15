@@ -1,13 +1,13 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
-import { Box, ListItem, ListItemIcon, ListSubheader, ListItemSecondaryAction, ListItemText, Grid, Container, Typography, Card, CardActionArea, CardContent, CardMedia, Divider, List, Switch, IconButton } from '@material-ui/core';
+import { Box, ListItem, ListItemIcon, ListSubheader, ListItemSecondaryAction, ListItemText, Grid, Container, Typography, Card, CardActionArea, CardContent, CardMedia, Divider, List, Switch, IconButton, Fab } from '@material-ui/core';
 import Variants from './Variant';
 import { makeStyles } from "@material-ui/core/styles";
-import { SchoolRounded, Home, Person, WbSunnyRounded, Book, ChevronRight } from '@material-ui/icons'
+import { SchoolRounded, Home, Person, WbSunnyRounded, Book, ChevronRight, Add } from '@material-ui/icons'
 import profileData from './profileData';
 import AppBarred from '../AppBar/AppBarred';
 import { Link } from 'react-router-dom';
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: 345,
         margin: 10,
@@ -18,8 +18,13 @@ const useStyles = makeStyles({
     },
     title: {
         flexGrow: 1,
+    },
+    fabBtn: {
+        position: 'absolute',
+        bottom: theme.spacing(5),
+        right: theme.spacing(2),
     }
-});
+}));
 export default function Profile({ darkState, handleThemeChange, isLoggedin, setLogin }) {
     const classes = useStyles();
     const [data, setdata] = React.useState([]);
@@ -42,32 +47,36 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
                                 <List subheader={<ListSubheader>Profile</ListSubheader>} className={classes.root}>
                                 </List>{isLoggedin ? (!data.length ? <Variants /> : (
                                     data.map(data =>
-                                        <CardActionArea key={data.name}>
-                                            <CardMedia
-                                                className={classes.media}
-                                                image={data.img}
-                                                title={data.name}
-                                            />
-                                            <CardContent>
-                                                <Typography style={{ textAlign: 'center' }} component="h4" variant="h4">
-                                                    {data.name}
-                                                </Typography>
-                                                <Divider />
-                                                <Typography component="small" variant="subtitle1" >
-                                                    <SchoolRounded />{data.school}
-                                                </Typography><br />
-                                                <Typography component="small" varaint="subtitle1">
-                                                    <Person /> {data.profession}
-                                                </Typography><br />
-                                                <Typography component="small" variant="subtitle1">
-                                                    <Home />{data.address}
-                                                </Typography>
-                                                <Divider />
-                                                <Typography style={{ textAlign: 'center' }} component="p" variant="caption">
-                                                    {data.description}
-                                                </Typography>
-                                            </CardContent>
-                                        </CardActionArea>
+                                        <div>
+                                            <CardActionArea key={data.name}>
+                                                <CardMedia
+                                                    className={classes.media}
+                                                    image={data.img}
+                                                    title={data.name}
+                                                />
+                                                <CardContent>
+                                                    <Typography style={{ textAlign: 'center' }} component="h4" variant="h4">
+                                                        {data.name}
+                                                    </Typography>
+                                                    <Divider />
+                                                    <Typography component="small" variant="subtitle1" >
+                                                        <SchoolRounded />{data.school}
+                                                    </Typography><br />
+                                                    <Typography component="small" varaint="subtitle1">
+                                                        <Person /> {data.profession}
+                                                    </Typography><br />
+                                                    <Typography component="small" variant="subtitle1">
+                                                        <Home />{data.address}
+                                                    </Typography>
+                                                    <Divider />
+                                                    <Typography style={{ textAlign: 'center' }} component="p" variant="caption">
+                                                        {data.description}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                            <Link to="/add" style={{ color: "inherit", textDecoration: "inherit" }}>
+                                                <Fab className={classes.fabBtn} title="Add Book" > <Add /> </Fab></Link>
+                                        </div>
                                     )
                                 )) :
                                     <Container>

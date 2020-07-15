@@ -9,7 +9,10 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import AppBarred from '../AppBar/AppBarred';
 import Navigation from '../Navigation/Navigation';
-import { Link, useHistory } from 'react-router-dom';
+import {
+    Link,
+    useHistory
+} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -23,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Login({ isLoggedin, setLogin }) {
+export default function Login({ isLoggedin, setLogin, setUser, userInfo }) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,11 +39,26 @@ export default function Login({ isLoggedin, setLogin }) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        setLogin(true);
-        history.push("/");
-
+        async function postData() {
+            await fetch("/users/authenticate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: email,
+                    password: password
+                })
+            })
+                .then(res => res.json())
+                .then(data => setUser(data))
+                .catch(err => console.log(err));
+        }
+        postData();
+        console.log("\n user data:", userInfo)
+        if (userInfo.length) { setLogin(true); history.push("/") };
     }
     return (
         <div>
@@ -59,9 +77,9 @@ export default function Login({ isLoggedin, setLogin }) {
                             <TextField
                                 className={classes.margin}
                                 id="input-with-icon-textfield"
-                                label="Email"
-                                type='email'
-                                placeholder="email"
+                                label="username"
+                                type='username'
+                                placeholder="username"
                                 onChange={event => setEmail(event.target.value)}
                                 value={email}
                                 autoComplete="off"
@@ -111,6 +129,7 @@ export default function Login({ isLoggedin, setLogin }) {
                             /><br />
                             <Button type="submit" variant="contained" color="inherit" >Login</Button>
                         </form><br />
+
                         <Typography component="h3" color="error" style={{ textAlign: 'center' }}>
                             Not A member? <Link to={"/signup"}>Sign up!</Link>
                         </Typography>

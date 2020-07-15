@@ -18,10 +18,29 @@ import Variants from '../Profile/Variant';
 import Divider from '@material-ui/core/Divider';
 import AppBarHome from '../AppBar/AppBarHome';
 import SearchBox from '../SearchBox/SearchBox';
+import { Link } from "react-router-dom";
+
+/**
+const books = gql`
+  {
+    books{
+        name
+        author{
+            author
+        }
+
+    }
+    }
+  }
+`;
+**/
+
 // import data from "../data";
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
+        width: 300,
+        maxHeight: 438,
         margin: 10,
         borderRadius: 25
     },
@@ -46,10 +65,11 @@ export default function Home({
     setWish,
     setSearchField,
     setCategory,
+    category,
     filteredResults
 }) {
     const classes = useStyles();
-    const [Page, setPage] = React.useState(1)
+    const [Page, setPage] = React.useState(1);
     const [bookCount, setbookCount] = React.useState(4)
     function paginateGood(array, page_size, page_number) {
         // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
@@ -93,16 +113,16 @@ export default function Home({
                                 labelId="genre-select-opt"
                                 label='Category'
                                 id="genre-select"
+                                value={category}
                                 onChange={handleCategory}
                             >
                                 <MenuItem
                                     onClick={() => optValue = 'All'} value={'All'}>All</MenuItem>
-                                {unique.sort().map(dat => <MenuItem
+                                {unique.sort().map(dat => <MenuItem key={dat}
                                     onClick={() => optValue = dat} value={dat}>{dat}</MenuItem>)}
                             </Select>
                             <FormHelperText>Select Genre.</FormHelperText>
                         </FormControl>
-
                     </div>
                     <Grid
                         container
@@ -118,7 +138,7 @@ export default function Home({
                                     <CardActionArea>
                                         <CardMedia
                                             className={classes.media}
-                                            image={data.image}
+                                            image={`http://localhost:8000/media/images/harry.jpg`}
                                             title={data.name}
                                         />
                                         <CardContent>
@@ -126,10 +146,10 @@ export default function Home({
                                                 {data.name}
                                             </Typography>
                                             <Typography variant="subtitle2" color="inherit" component="span">
-                                                <small><WriteIcon />Author:</small> {data.author}
+                                                <small><WriteIcon />Author:{data.author}</small>
                                             </Typography>
                                             <Typography variant="subtitle1" color="inherit" component="p">
-                                                <small><PostedIcon />Posted by:</small>  {data.postedBy}
+                                                <small><PostedIcon />Posted by:</small>  <Link to={"/user/:id"} > {data.postedBy.firstName} {data.postedBy.lastName}</Link>
                                             </Typography>
                                             <Typography variant="subtitle2" color="inherit" component="p">
                                                 <small>Original Price :</small>Rs.  {data.originalPrice}
@@ -172,13 +192,13 @@ export default function Home({
                                 labelId="show-book-opt"
                                 label='No'
                                 id="count-select"
+                                value={bookCount}
                                 onChange={handleCount}
                             >
                                 <MenuItem value={4}>4</MenuItem>
                                 <MenuItem value={6}>6</MenuItem>
                                 <MenuItem value={8}>8</MenuItem>
                                 <MenuItem value={10}>10</MenuItem>
-
                             </Select>
                             <FormHelperText>books per page</FormHelperText>
                         </FormControl>

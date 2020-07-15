@@ -60,7 +60,7 @@ export default function CartShow({ open, handleClose, cart, setCart }) {
                     {cart.map(item =>
                         <section key={Math.random()}>
                             <ListItem button>
-                                <ListItemText primary={`Book: ${item.name}`} secondary={`Author: ${item.author} \n| Price: ${item.discountedPrice}`} />
+                                <ListItemText primary={`Book: ${item.name}`} secondary={`Author: ${item.author.author} \n| Price: ${item.discountedPrice}`} />
                                 <IconButton onClick={handleDelete(item)}>
                                     <Delete />
                                 </IconButton>
