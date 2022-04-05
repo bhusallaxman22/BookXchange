@@ -21,7 +21,8 @@ export default function Variants() {
                     <Skeleton variant="text" width={210} />
                     <Skeleton variant="text" width={210} />
                     <Skeleton variant="text" width={210} /><br />
-                </div>            <div>
+                </div>
+                <div>
                     <Skeleton variant="rect" width={210} height={118} />
                     <Skeleton variant="text" width={210} />
                     <Skeleton variant="text" width={210} />

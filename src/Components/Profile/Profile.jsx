@@ -122,7 +122,6 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
                     </Container>
                 </Box>
             </Box>
-            <Navigation />
         </Box>
 
     )

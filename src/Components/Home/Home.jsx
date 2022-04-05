@@ -8,7 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Navigation from '../Navigation/Navigation';
 import Grid from '@material-ui/core/Grid';
 import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
 import WriteIcon from "@material-ui/icons/EditOutlined";
@@ -18,7 +17,6 @@ import Variants from '../Profile/Variant';
 import Divider from '@material-ui/core/Divider';
 import AppBarHome from '../AppBar/AppBarHome';
 import SearchBox from '../SearchBox/SearchBox';
-import { Link } from "react-router-dom";
 
 /**
 const books = gql`
@@ -146,16 +144,13 @@ export default function Home({
                                                 {data.name}
                                             </Typography>
                                             <Typography variant="subtitle2" color="inherit" component="span">
-                                                <small><WriteIcon />Author:{data.author}</small>
+                                                <small><WriteIcon />Publication:{data.Publication}</small>
                                             </Typography>
                                             <Typography variant="subtitle1" color="inherit" component="p">
-                                                <small><PostedIcon />Posted by:</small>  <Link to={"/user/:id"} > {data.postedBy.firstName} {data.postedBy.lastName}</Link>
-                                            </Typography>
-                                            <Typography variant="subtitle2" color="inherit" component="p">
-                                                <small>Original Price :</small>Rs.  {data.originalPrice}
+                                                <small><PostedIcon />Faculty:</small> {data.faculty}
                                             </Typography>
                                             <Typography variant="subtitle2" color="inherit" component="strong">
-                                                <small>Discounted Price :</small>Rs.  {data.discountedPrice}
+                                                <small>Price :</small>Rs.  {data.discountedPrice}
                                             </Typography>
                                             <Divider />
                                             <Typography variant="body2" color="textSecondary" component="p">
@@ -205,7 +200,6 @@ export default function Home({
                     </div>
                 </Box>
             </Box>
-            < Navigation />
         </Box>
     )
 }

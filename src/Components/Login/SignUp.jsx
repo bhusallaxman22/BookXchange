@@ -295,7 +295,6 @@ export default function SignUp({ isLoggedin, setLogin }) {
                     </Typography>
                 </Container>
             </Grid>
-            <Navigation />
         </Box>
     </div >;
 

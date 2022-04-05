@@ -17,7 +17,7 @@ export default function SearchBox({ setSearchField }) {
                     <SearchRounded />
                 </Grid>
                 <Grid item>
-                    <TextField variant="standard" onChange={event => setSearchField(event.target.value)} id="input-with-icon-grid" label="Search for Books" />
+                    <TextField variant="standard" onChange={event => setSearchField(event)} id="input-with-icon-grid" label="Search for Books" />
                 </Grid>
             </Grid>
         </div>

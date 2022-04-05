@@ -5,6 +5,7 @@ import App from './Container/App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
+import Navigation from './Components/Navigation/Navigation';
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql/'
@@ -33,11 +34,12 @@ client.query({
   `}).then(data => console.log(data.data.books))
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  // <ApolloProvider client={client}>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </ApolloProvider>,
+  // </ApolloProvider>,
+  ,
   document.getElementById('root')
 );
 

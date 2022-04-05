@@ -45,7 +45,7 @@ export default function CartShow({ open, handleClose, cart, setCart }) {
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="h6" className={classes.name}>
                             Cart
             </Typography>
                         {cart.length ? <Button size="small" autoFocus onClick={clearCart} style={{ background: 'red' }}>Clear Cart </Button> : null}
@@ -60,7 +60,7 @@ export default function CartShow({ open, handleClose, cart, setCart }) {
                     {cart.map(item =>
                         <section key={Math.random()}>
                             <ListItem button>
-                                <ListItemText primary={`Book: ${item.name}`} secondary={`Author: ${item.author.author} \n| Price: ${item.discountedPrice}`} />
+                                <ListItemText primary={`Book: ${item.name}`} secondary={`Faculty: ${item.faculty} \n| Price: ${item.discountedPrice}`} />
                                 <IconButton onClick={handleDelete(item)}>
                                     <Delete />
                                 </IconButton>

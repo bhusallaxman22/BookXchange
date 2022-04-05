@@ -148,7 +148,6 @@ export default function Add({ isLoggedin, props }) {
                     </Grid>
                 </Box>
             </Box>
-            <Navigation />
         </Box > : <EditError />
     )
 

@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import { Delete } from '@material-ui/icons';
+import { Delete, SettingsApplications } from '@material-ui/icons';
 
 // import { Delete } from '@material-ui/icons';
 
@@ -48,20 +48,24 @@ export default function WishShow({ open, handleClose, cart, setCart }) {
                         </IconButton>
                         <Typography variant="h6" className={classes.title}>
                             Cart
-            </Typography>
+                        </Typography>
                         {cart.length ? <Button size="small" autoFocus onClick={clearCart} style={{ background: 'red' }}>Clear Wishlist </Button> : null}
-
                         <Button autoFocus color="inherit" onClick={handleClose}>
                             Checkout
-            </Button>
-
+                        </Button>
                     </Toolbar>
                 </AppBar>
                 <List>
                     {cart.map(item =>
                         <section key={item.id * Math.random()}>
                             <ListItem button>
-                                <ListItemText primary={`Book: ${item.name}`} secondary={`Author: ${item.author.author} \n| Price: ${item.discountedPrice}`} />
+                                <ListItemText primary={`Book: ${item.name}`} secondary={
+                                    //  `Faculty: ${item.faculty} | Year/Semester= ${item.year_sem} | Price: ${item.discountedPrice} `
+                                    <div>
+                                        <Typography variant='body2' component={"p"}>Faculty: {item.faculty} | Year/Semester= {item.year_sem}</Typography>
+                                        <Typography variant='body2' component={"p"}>Price: {item.price}</Typography>
+                                    </div>
+                                } />
                                 <IconButton onClick={handleDelete(item)}>
                                     <Delete />
                                 </IconButton>

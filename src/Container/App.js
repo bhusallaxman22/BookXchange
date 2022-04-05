@@ -18,34 +18,37 @@ import Edit from '../Components/Profile/Edit';
 import { chain } from "lodash";
 // import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
-// import data from '../Components/data'
+// import { useQuery } from '@apollo/react-hooks';
+import data from '../Components/data'
 import UserProfile from '../Components/UserProfile/UserProfile';
 import Category from '../Components/Category/Category';
+import Navigation from '../Components/Navigation/Navigation';
+import Fuse from 'fuse.js';
+import Categorised from '../Components/Category/Categorised';
+import { useParams } from 'react-router-dom';
 
-
-const GRAPH_DATA =
-  gql`
-  {
-    books {
-      id
-      name
-      genre
-      author
-      postedBy{
-        id
-        firstName
-        lastName
-        bookSet{
-          name
-        }
-      }
-      description
-      originalPrice
-      discountedPrice
-    }
-  }
-    `
+// const GRAPH_DATA =
+//   gql`
+//   {
+//     books {
+//       id
+//       name
+//       genre
+//       author
+//       postedBy{
+//         id
+//         firstName
+//         lastName
+//         bookSet{
+//           name
+//         }
+//       }
+//       description
+//       originalPrice
+//       discountedPrice
+//     }
+//   }
+//     `
 
 function App() {
   const [darkState, setDarkState] = useState(false);
@@ -54,6 +57,8 @@ function App() {
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
   const mainSecondaryColor = darkState ? deepOrange[900] : deepPurple[500];
+  const [searchResult, setSearchResult] = useState([]);
+  const [search, setSearch] = useState("");
 
   // FOR HOME.JSX
   const [datas, setdata] = useState([]);
@@ -61,25 +66,25 @@ function App() {
   const [Wish, setWish] = useState([]);
   const [category, setCategory] = useState('All');
 
-  const unique = chain(datas).map('genre').flatten().uniq().value();
-  // unique.push('All')
+  const unique = chain(datas).map('faculty').flatten().uniq().value();
   const filteredResult = datas.filter((item) =>
-    category === 'All' ? datas : (item.genre.indexOf(category) >= 0)
+    category === 'All' ? data : (item.faculty == category)
   );
 
   //GET USER INFO.
   const [userInfo, setUser] = useState([]);
 
-  const { loading, error, data } = useQuery(GRAPH_DATA);
-  let graphBook;
-  if (!loading) graphBook = data;
+  let loading, error;
+  // useQuery(GRAPH_DATA);
+  // let graphBook;
+  // if (!loading) graphBook = data;
 
   useEffect(() => {
     var aaa = localStorage.getItem("dark");
     console.log("darkmode state from localStorage:", aaa);
     aaa === null ? aaa = false : setDarkState(JSON.parse(aaa));
-    graphBook !== undefined ? setdata(graphBook.books) : setdata([])
-  }, [graphBook])
+    setdata(data)
+  }, [data])
 
   const addToCart = (data) => {
     const newCart = [...Cart, data];
@@ -91,7 +96,6 @@ function App() {
     setWish(newWish);
     console.log(newWish);
   }
-
   const darkTheme = createMuiTheme({
     palette: {
       type: palletType,
@@ -103,16 +107,27 @@ function App() {
       }
     }
   });
-  const filteredBooks = filteredResult.filter(book => {
-    return book.name.toLowerCase().includes(SearchField.toLowerCase());
+  const fuse = new Fuse(filteredResult, {
+    keys: ["name", "faculty", "sub_faculty", "description", "year_sem"],
+    includeScore: true,
+    threshold: 0.3,
   });
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+    setSearchResult(fuse.search(e.target.value));
+  };
+
+  const sBook =
+    searchResult.length > 0 ? searchResult.map((book) => book.item) : filteredResult;
+  // const filteredBooks = filteredResult.filter(book => {
+  //   return book.name.toLowerCase().includes(SearchField.toLowerCase());
+  // });
   const handleThemeChange = () => {
     setDarkState(!darkState);
     localStorage.setItem("dark", !darkState);
   };
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -122,7 +137,7 @@ function App() {
             <Home
               isLoggedin={isLoggedin}
               setLogin={setLogin}
-              datas={filteredBooks}
+              datas={sBook}
               Cart={Cart}
               unique={unique}
               Wish={Wish}
@@ -132,7 +147,7 @@ function App() {
               setWish={setWish}
               category={category}
               setCategory={setCategory}
-              setSearchField={setSearchField}
+              setSearchField={onChangeSearch}
               filteredResults={filteredResult}
             // error={error}
             // loading={loading}
@@ -167,8 +182,18 @@ function App() {
           <Route path="/categories" >
             <Category isLoggedin={isLoggedin} />
           </Route>
+          <Route path="/books/:id" >
+            <Categorised isLoggedin={isLoggedin} data={data} addToCart={addToCart}
+              addToWish={addToWish}
+              Cart={Cart}
+              Wish={Wish}
+              setCart={setCart}
+              setWish={setWish} />
+          </Route>
         </Switch>
+        <Navigation />
       </Router>
+
     </ThemeProvider>
   );
 }

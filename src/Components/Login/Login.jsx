@@ -8,7 +8,9 @@ import { Button, Box, Typography, IconButton, Container } from '@material-ui/cor
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import AppBarred from '../AppBar/AppBarred';
-import Navigation from '../Navigation/Navigation';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
 import {
     Link,
     useHistory
@@ -25,13 +27,26 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "2px 2px 5px 2px"
     }
 }));
-
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 export default function Login({ isLoggedin, setLogin, setUser, userInfo }) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
     const [showPassword, setshowPassword] = useState(false)
+    const [open, setOpen] = React.useState(false);
+    const [sever, setSever] = React.useState("")
+    const [msg, setMsg] = React.useState()
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     const handleClickShowPassword = () => {
         setshowPassword(!showPassword);
     };
@@ -53,8 +68,17 @@ export default function Login({ isLoggedin, setLogin, setUser, userInfo }) {
                 })
             })
                 .then(res => res.json())
-                .then(data => setUser(data))
-                .catch(err => console.log(err));
+                .then(data => {
+                    setUser(data)
+                    setOpen(true);
+                    setMsg("Login Successful ")
+                    setSever("success")
+                })
+                .catch(err => {
+                    setMsg("Login Error: Internal Server Error")
+                    setOpen(true);
+                    setSever("error")
+                });
         }
         postData();
         console.log("\n user data:", userInfo)
@@ -135,7 +159,12 @@ export default function Login({ isLoggedin, setLogin, setUser, userInfo }) {
                         </Typography>
                     </Container>
                 </Grid>
-                <Navigation />
+                <Snackbar anchorOrigin={{vertical:"bottom", horizontal:"right"}} open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity={sever}>
+                        {msg}
+                    </Alert>
+                </Snackbar>
+                {/* <Navigation /> */}
             </Box>
         </div>
     );

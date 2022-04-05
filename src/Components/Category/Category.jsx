@@ -14,6 +14,7 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import { Grid, IconButton, Divider } from '@material-ui/core';
 import Navigation from '../Navigation/Navigation';
 import { ArrowRight, Settings, LocalHospitalOutlined, Computer, Money, Fingerprint } from '@material-ui/icons';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,16 +31,16 @@ const engineering = [
     "Civil", "Mechanical", "Computer", "Electrical", "Architecture", "Automobile"
 ]
 const bsc = [
-    "Bsc. CSIT", "BSc. General", "Bsc. Mathematics", "BSc. Physics"
+    "CSIT", "General", "Mathematics", "Physics", 
 ]
 const computer = [
     "BCA", "BIT", "BCS",
 ]
 const Medecine = [
-    "Medical MBBS", "Bachelor in Pharmacy", "Bacelor in Public Health", "Bachelor in Dental Studies"
+    "MBBS", "Bachelor in Pharmacy", "BPH", "BDS", 
 ]
 const account = [
-    "BBS", "BBA", "BBM", "BHM"
+    "BBS", "BBA", "BBM", "BHM", 
 ]
 
 export default function Category({ isLoggedin }) {
@@ -82,7 +83,7 @@ export default function Category({ isLoggedin }) {
                             subheader={
                                 <ListSubheader component="div" id="nested-list-subheader">
                                     Select A Category
-          </ListSubheader>
+                                </ListSubheader>
                             }
                             className={classes.root}
                         ><Divider />
@@ -100,7 +101,10 @@ export default function Category({ isLoggedin }) {
                                             <ListItemIcon>
                                                 <StarBorder />
                                             </ListItemIcon>
-                                            <ListItemText primary={courses} /><IconButton> <ArrowRight /></IconButton>
+                                            <ListItemText primary={courses} />
+                                            <Link to={`/books/${courses}`}>
+                                                <IconButton> <ArrowRight /></IconButton>
+                                            </Link>
                                         </ListItem>
 
                                     </List>
@@ -120,7 +124,10 @@ export default function Category({ isLoggedin }) {
                                             <ListItemIcon>
                                                 <StarBorder />
                                             </ListItemIcon>
-                                            <ListItemText primary={courses} /><IconButton> <ArrowRight /></IconButton>
+                                            <ListItemText primary={courses} />
+                                            <Link to={`/books/${courses}`}>
+                                                <IconButton> <ArrowRight /></IconButton>
+                                            </Link>
                                         </ListItem>
 
                                     </List>
@@ -140,7 +147,10 @@ export default function Category({ isLoggedin }) {
                                             <ListItemIcon>
                                                 <StarBorder />
                                             </ListItemIcon>
-                                            <ListItemText primary={courses} /><IconButton> <ArrowRight /></IconButton>
+                                            <ListItemText primary={courses} />
+                                            <Link to={`/books/${courses}`}>
+                                                <IconButton> <ArrowRight /></IconButton>
+                                            </Link>
                                         </ListItem>
 
                                     </List>
@@ -160,7 +170,10 @@ export default function Category({ isLoggedin }) {
                                             <ListItemIcon>
                                                 <StarBorder />
                                             </ListItemIcon>
-                                            <ListItemText primary={courses} /><IconButton> <ArrowRight /></IconButton>
+                                            <ListItemText primary={courses} />
+                                            <Link to={`/books/${courses}`}>
+                                                <IconButton> <ArrowRight /></IconButton>
+                                            </Link>
                                         </ListItem>
 
                                     </List>
@@ -180,9 +193,11 @@ export default function Category({ isLoggedin }) {
                                             <ListItemIcon>
                                                 <StarBorder />
                                             </ListItemIcon>
-                                            <ListItemText primary={courses} /><IconButton> <ArrowRight /></IconButton>
+                                            <ListItemText primary={courses} />
+                                            <Link to={`/books/${courses}`} >
+                                            <IconButton> <ArrowRight /></IconButton>
+                                            </Link>
                                         </ListItem>
-
                                     </List>
                                 )}
                             </Collapse>
@@ -190,7 +205,6 @@ export default function Category({ isLoggedin }) {
                     </Grid>
                 </Box>
             </Box>
-            <Navigation />
         </Box>
     )
 }
