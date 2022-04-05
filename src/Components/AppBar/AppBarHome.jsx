@@ -33,7 +33,7 @@ export default function AppBarHome({
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" style={{ flexGrow: 1 }}>
-                        <Link style={{ textDecoration: 'none', textAnchor: 'unset', color: "inherit" }} to={"/"}>   Bookstore(IMJC)</Link>
+                        <Link style={{ textDecoration: 'none', textAnchor: 'unset', color: "inherit" }} to={"/"}>   Book Exchange</Link>
                     </Typography>
                     <IconButton aria-label="show shopping items" color="inherit" onClick={handleOpen}>
                         <Badge badgeContent={Cart.length} color="secondary">

@@ -4,8 +4,8 @@ import './index.css';
 import App from './Container/App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient, { gql } from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
-import Navigation from './Components/Navigation/Navigation';
+// import { ApolloProvider } from '@apollo/react-hooks';
+// import Navigation from './Components/Navigation/Navigation';
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql/'

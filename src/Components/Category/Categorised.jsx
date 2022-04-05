@@ -34,7 +34,7 @@ function Categorised(props) {
         setData(props.data);
         setSubFaculty(id);
     }
-        , [props.data, props.category, props.sub_faculty]);
+        , [props.data, props.category, props.sub_faculty,id]);
 
     // filter data based sub_faculty where sub_faculty is an array
     const filteredData = data.filter(item => item.sub_faculty.includes(sub_faculty));

@@ -12,9 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import { Delete, SettingsApplications } from '@material-ui/icons';
-
-// import { Delete } from '@material-ui/icons';
+import { Delete } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {

@@ -17,7 +17,7 @@ import MyBooks from '../Components/Profile/myBooks';
 import Edit from '../Components/Profile/Edit';
 import { chain } from "lodash";
 // import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+// import { gql } from 'apollo-boost';
 // import { useQuery } from '@apollo/react-hooks';
 import data from '../Components/data'
 import UserProfile from '../Components/UserProfile/UserProfile';
@@ -25,7 +25,7 @@ import Category from '../Components/Category/Category';
 import Navigation from '../Components/Navigation/Navigation';
 import Fuse from 'fuse.js';
 import Categorised from '../Components/Category/Categorised';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 // const GRAPH_DATA =
 //   gql`
@@ -53,12 +53,11 @@ import { useParams } from 'react-router-dom';
 function App() {
   const [darkState, setDarkState] = useState(false);
   const [isLoggedin, setLogin] = useState(false);
-  const [SearchField, setSearchField] = useState('');
+  // const [SearchField, setSearchField] = useState('');
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
   const mainSecondaryColor = darkState ? deepOrange[900] : deepPurple[500];
   const [searchResult, setSearchResult] = useState([]);
-  const [search, setSearch] = useState("");
 
   // FOR HOME.JSX
   const [datas, setdata] = useState([]);
@@ -68,7 +67,7 @@ function App() {
 
   const unique = chain(datas).map('faculty').flatten().uniq().value();
   const filteredResult = datas.filter((item) =>
-    category === 'All' ? data : (item.faculty == category)
+    category === 'All' ? data : (item.faculty === category)
   );
 
   //GET USER INFO.
@@ -84,7 +83,7 @@ function App() {
     console.log("darkmode state from localStorage:", aaa);
     aaa === null ? aaa = false : setDarkState(JSON.parse(aaa));
     setdata(data)
-  }, [data])
+  }, [])
 
   const addToCart = (data) => {
     const newCart = [...Cart, data];
@@ -113,7 +112,7 @@ function App() {
     threshold: 0.3,
   });
   const onChangeSearch = (e) => {
-    setSearch(e.target.value);
+    // setSearch(e.target.value);
     setSearchResult(fuse.search(e.target.value));
   };
 
@@ -135,7 +134,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home
-              isLoggedin={isLoggedin}
+              isLoggedin={isLoggedin} 
               setLogin={setLogin}
               datas={sBook}
               Cart={Cart}

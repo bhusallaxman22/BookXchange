@@ -8,7 +8,7 @@ import { Button, Box, Container, Typography, IconButton, FormControl } from '@ma
 import AppBarred from '../AppBar/AppBarred';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Navigation from '../Navigation/Navigation';
+// import Navigation from '../Navigation/Navigation';
 import {
     Link,
     // useHistory
@@ -16,18 +16,18 @@ import {
 import Step from '@material-ui/core/Step';
 import Stepper from '@material-ui/core/Stepper';
 import StepLabel from '@material-ui/core/StepLabel';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+// import gql from 'graphql-tag';
+// import { useMutation } from '@apollo/react-hooks';
 
-const SIGN_UP = gql`
-mutation SignUp($email:String!,$password:String!,$username:String!){
-createUser(email:$email,password:$password,username:$username){
-        userInstance{
-            username
-          }
-        }
-    }
-`;
+// const SIGN_UP = gql`
+// mutation SignUp($email:String!,$password:String!,$username:String!){
+// createUser(email:$email,password:$password,username:$username){
+//         userInstance{
+//             username
+//           }
+//         }
+//     }
+// `;
 const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(1),
@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function SignUp({ isLoggedin, setLogin }) {
-    const [addUser, { data }] = useMutation(SIGN_UP);
+    let addUser,data;
+    // = useMutation(SIGN_UP);
 
     const classes = useStyles();
     const [username, setUsername] = useState('');
@@ -103,7 +104,7 @@ export default function SignUp({ isLoggedin, setLogin }) {
         addUser({ variables: { username, email, password } });
         setTimeout(async () => {
             console.log(data)
-            data ? handleNext() : alert("SOme error occured");
+            data ? handleNext() : alert("Some error occured");
         }, 2000);
     }
 

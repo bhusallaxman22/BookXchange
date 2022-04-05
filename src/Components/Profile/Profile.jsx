@@ -1,5 +1,4 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
 import { Box, ListItem, ListItemIcon, ListSubheader, ListItemSecondaryAction, ListItemText, Grid, Container, Typography, Card, CardActionArea, CardContent, CardMedia, Divider, List, Switch, IconButton, Fab } from '@material-ui/core';
 import Variants from './Variant';
 import { makeStyles } from "@material-ui/core/styles";
