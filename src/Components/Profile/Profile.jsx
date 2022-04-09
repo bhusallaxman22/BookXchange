@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, ListItem, ListItemIcon, ListSubheader, ListItemSecondaryAction, ListItemText, Grid, Container, Typography, Card, CardActionArea, CardContent, CardMedia, Divider, List, Switch, IconButton, Fab } from '@material-ui/core';
+import { Box, ListItem, ListItemIcon, ListSubheader, ListItemSecondaryAction, ListItemText, Grid, Container, Typography, Card, CardActionArea, CardContent, CardMedia, Divider, List, Switch, IconButton, Fab } from '@mui/material';
 import Variants from './Variant';
-import { makeStyles } from "@material-ui/core/styles";
-import { SchoolRounded, Home, Person, WbSunnyRounded, Book, ChevronRight, Add } from '@material-ui/icons'
+import makeStyles from '@mui/styles/makeStyles';
+import { SchoolRounded, Home, Person, WbSunnyRounded, Book, ChevronRight, Add } from '@mui/icons-material'
 import profileData from './profileData';
 import AppBarred from '../AppBar/AppBarred';
 import { Link } from 'react-router-dom';
@@ -38,7 +38,7 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
                     <Container className="container">
                         <Grid
                             container
-                            justify="center"
+                            justifyContent="center"
                             alignContent="center"
                             alignItems="center"
                             className="row">
@@ -108,7 +108,7 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
                                         </ListItemIcon>
                                         <ListItemText id="myBooks" primary="My Books" />
                                         <ListItemSecondaryAction>
-                                            <IconButton>
+                                            <IconButton size="large">
                                                 <Link style={{ color: 'inherit', textDecoration: 'none' }} to={'/myBooks'} >
                                                     <ChevronRight />
                                                 </Link>
@@ -122,6 +122,5 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
                 </Box>
             </Box>
         </Box>
-
-    )
+    );
 }

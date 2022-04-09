@@ -1,20 +1,20 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
-import WriteIcon from "@material-ui/icons/EditOutlined";
-import PostedIcon from "@material-ui/icons/PersonOutlineTwoTone";
-import { Pagination } from "@material-ui/lab";
+import makeStyles from '@mui/styles/makeStyles';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@mui/material';
+import WriteIcon from "@mui/icons-material/EditOutlined";
+import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
+import { Pagination } from '@mui/material';
 import Variants from '../Profile/Variant';
-import Divider from '@material-ui/core/Divider';
+import Divider from '@mui/material/Divider';
 import AppBarHome from '../AppBar/AppBarHome';
 import SearchBox from '../SearchBox/SearchBox';
 
@@ -125,7 +125,7 @@ export default function Home({
                     <Grid
                         container
                         direction="row"
-                        justify="center"
+                        justifyContent="center"
                         alignItems="center" >
                         {!datas.length ? (
                             <Box>
@@ -201,5 +201,5 @@ export default function Home({
                 </Box>
             </Box>
         </Box>
-    )
+    );
 }

@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, IconButton, Badge, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, IconButton, Badge, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { ShoppingCartRounded, Favorite } from '@material-ui/icons'
+import { ShoppingCartRounded, Favorite } from '@mui/icons-material'
 import CartShow from '../Cart/CartShow';
 import WishShow from '../Cart/WishShow';
 export default function AppBarHome({
@@ -35,13 +35,21 @@ export default function AppBarHome({
                     <Typography variant="h6" style={{ flexGrow: 1 }}>
                         <Link style={{ textDecoration: 'none', textAnchor: 'unset', color: "inherit" }} to={"/"}>   Book Exchange</Link>
                     </Typography>
-                    <IconButton aria-label="show shopping items" color="inherit" onClick={handleOpen}>
+                    <IconButton
+                        aria-label="show shopping items"
+                        color="inherit"
+                        onClick={handleOpen}
+                        size="large">
                         <Badge badgeContent={Cart.length} color="secondary">
                             <ShoppingCartRounded />
                         </Badge>
                     </IconButton>
                     <CartShow open={open} handleClose={handleClose} handleOpen={handleOpen} cart={Cart} setCart={setCart} />
-                    <IconButton aria-label="show whitelist items" color="inherit" onClick={handleOpenWish}>
+                    <IconButton
+                        aria-label="show whitelist items"
+                        color="inherit"
+                        onClick={handleOpenWish}
+                        size="large">
                         <Badge badgeContent={Wish.length} color="secondary">
                             <Favorite />
                         </Badge>
@@ -52,7 +60,7 @@ export default function AppBarHome({
                 </Toolbar>
             </AppBar>
         </div>
-    )
+    );
 }
 
 

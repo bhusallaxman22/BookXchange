@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import { AccountCircle, Lock } from '@material-ui/icons/';
-import { Button, Box, Typography, IconButton, Container } from '@material-ui/core';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import makeStyles from '@mui/styles/makeStyles';
+import InputAdornment from '@mui/material/InputAdornment'
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import { AccountCircle, Lock } from '@mui/icons-material/';
+import { Button, Box, Typography, IconButton, Container } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AppBarred from '../AppBar/AppBarred';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import {
     Link,
@@ -91,7 +91,7 @@ export default function Login({ isLoggedin, setLogin, setUser, userInfo }) {
                 <Grid className="main-content"
                     container
                     direction="row"
-                    justify="center"
+                    justifyContent="center"
                     alignItems="center" >
                     <Container className={classes.root}>
                         <Typography component="h1" color="textPrimary" style={{ textAlign: 'center' }}>
@@ -144,7 +144,7 @@ export default function Login({ isLoggedin, setLogin, setUser, userInfo }) {
                                                 onClick={handleClickShowPassword}
                                                 onMouseDown={handleMouseDownPassword}
                                                 edge="end"
-                                            >
+                                                size="large">
                                                 {showPassword ? <Visibility /> : <VisibilityOff />}
                                             </IconButton>
                                         </InputAdornment>

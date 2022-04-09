@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "proxy": "http://localhost:8000",
   "private": true,
+  "author": "Laxman Bhusal",
+  "description": "A web app to buy and sell second hand books",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
-    "@material-ui/core": "^4.10.0",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.54",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.0",
+    "@mui/lab": "^5.0.0-alpha.76",
+    "@mui/material": "^5.6.0",
+    "@mui/styles": "^5.6.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -17,8 +22,8 @@
     "fuse.js": "^6.5.3",
     "graphql": "^15.1.0",
     "lodash": "^4.17.15",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
@@ -43,6 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "caniuse-lite": "^1.0.30001327"
   },
   "devDependencies": {
     "gh-pages": "^2.2.0"

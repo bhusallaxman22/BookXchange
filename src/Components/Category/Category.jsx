@@ -1,18 +1,18 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import Box from "@material-ui/core/Box";
+import makeStyles from '@mui/styles/makeStyles';
+import ListSubheader from '@mui/material/ListSubheader';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import Box from "@mui/material/Box";
 import AppBarred from '../AppBar/AppBarred';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-import { Grid, IconButton, Divider } from '@material-ui/core';
-import { ArrowRight, Settings, LocalHospitalOutlined, Computer, Money, Fingerprint } from '@material-ui/icons';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
+import { Grid, IconButton, Divider } from '@mui/material';
+import { ArrowRight, Settings, LocalHospitalOutlined, Computer, Money, Fingerprint } from '@mui/icons-material';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -74,7 +74,7 @@ export default function Category({ isLoggedin }) {
                         container
                         alignContent="center"
                         alignItems="center"
-                        justify="center"
+                        justifyContent="center"
                     >
                         <List
                             component="nav"
@@ -102,7 +102,7 @@ export default function Category({ isLoggedin }) {
                                             </ListItemIcon>
                                             <ListItemText primary={courses} />
                                             <Link to={`/books/${courses}`}>
-                                                <IconButton> <ArrowRight /></IconButton>
+                                                <IconButton size="large"> <ArrowRight /></IconButton>
                                             </Link>
                                         </ListItem>
 
@@ -125,7 +125,7 @@ export default function Category({ isLoggedin }) {
                                             </ListItemIcon>
                                             <ListItemText primary={courses} />
                                             <Link to={`/books/${courses}`}>
-                                                <IconButton> <ArrowRight /></IconButton>
+                                                <IconButton size="large"> <ArrowRight /></IconButton>
                                             </Link>
                                         </ListItem>
 
@@ -148,7 +148,7 @@ export default function Category({ isLoggedin }) {
                                             </ListItemIcon>
                                             <ListItemText primary={courses} />
                                             <Link to={`/books/${courses}`}>
-                                                <IconButton> <ArrowRight /></IconButton>
+                                                <IconButton size="large"> <ArrowRight /></IconButton>
                                             </Link>
                                         </ListItem>
 
@@ -171,7 +171,7 @@ export default function Category({ isLoggedin }) {
                                             </ListItemIcon>
                                             <ListItemText primary={courses} />
                                             <Link to={`/books/${courses}`}>
-                                                <IconButton> <ArrowRight /></IconButton>
+                                                <IconButton size="large"> <ArrowRight /></IconButton>
                                             </Link>
                                         </ListItem>
 
@@ -194,7 +194,7 @@ export default function Category({ isLoggedin }) {
                                             </ListItemIcon>
                                             <ListItemText primary={courses} />
                                             <Link to={`/books/${courses}`} >
-                                            <IconButton> <ArrowRight /></IconButton>
+                                            <IconButton size="large"> <ArrowRight /></IconButton>
                                             </Link>
                                         </ListItem>
                                     </List>
@@ -205,5 +205,5 @@ export default function Category({ isLoggedin }) {
                 </Box>
             </Box>
         </Box>
-    )
+    );
 }

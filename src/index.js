@@ -3,35 +3,35 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Container/App';
 import * as serviceWorker from './serviceWorker';
-import ApolloClient, { gql } from 'apollo-boost';
+// import ApolloClient, { gql } from 'apollo-boost';
 // import { ApolloProvider } from '@apollo/react-hooks';
 // import Navigation from './Components/Navigation/Navigation';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql/'
-})
-client.query({
-  query: gql`
-{
-  books {
-    id
-    name
-    genre
-    author
-    postedBy{
-      id
-      firstName
-      lastName
-      bookSet{
-        name
-      }
-    }
-    description
-    originalPrice
-    discountedPrice
-  }
-}
-  `}).then(data => console.log(data.data.books))
+// const client = new ApolloClient({
+//   uri: 'http://localhost:8000/graphql/'
+// })
+// client.query({
+//   query: gql`
+// {
+//   books {
+//     id
+//     name
+//     genre
+//     author
+//     postedBy{
+//       id
+//       firstName
+//       lastName
+//       bookSet{
+//         name
+//       }
+//     }
+//     description
+//     originalPrice
+//     discountedPrice
+//   }
+// }
+//   `}).then(data => console.log(data.data.books))
 
 ReactDOM.render(
   // <ApolloProvider client={client}>

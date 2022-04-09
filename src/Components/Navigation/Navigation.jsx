@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/HomeRounded';
-// import AddRoundIcon from '@material-ui/icons/AddBoxRounded';
-import ProfileIcon from '@material-ui/icons/PersonRounded';
+import makeStyles from '@mui/styles/makeStyles';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import HomeIcon from '@mui/icons-material/HomeRounded';
+// import AddRoundIcon from '@mui/icons-material/AddBoxRounded';
+import ProfileIcon from '@mui/icons-material/PersonRounded';
 import { Link } from 'react-router-dom';
-import { List } from '@material-ui/icons';
+import { List } from '@mui/icons-material';
 const useStyles = makeStyles({
   root: {
     width: 500,

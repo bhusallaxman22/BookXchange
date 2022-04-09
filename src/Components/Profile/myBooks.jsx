@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import WriteIcon from "@material-ui/icons/EditOutlined";
-import PostedIcon from "@material-ui/icons/PersonOutlineTwoTone";
+import makeStyles from '@mui/styles/makeStyles';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import WriteIcon from "@mui/icons-material/EditOutlined";
+import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 import data from '../data';
 import Variants from '../Profile/Variant';
-import { Divider, AppBar, Toolbar, IconButton } from '@material-ui/core';
-import { ChevronLeftRounded } from '@material-ui/icons';
+import { Divider, AppBar, Toolbar, IconButton } from '@mui/material';
+import { ChevronLeftRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
     root: {
@@ -44,7 +44,7 @@ export default function MyBooks() {
             <AppBar position="static">
                 <Toolbar>
                     <Link to={"/profile"}>
-                        <IconButton>
+                        <IconButton size="large">
                             <ChevronLeftRounded />
                         </IconButton></Link>
                 </Toolbar>
@@ -53,7 +53,7 @@ export default function MyBooks() {
                 <Grid className="inner-content"
                     container
                     direction="row"
-                    justify="center"
+                    justifyContent="center"
                     alignItems="center" >
                     {!data.length ? (
                         <Box>
@@ -119,5 +119,5 @@ export default function MyBooks() {
                 </Grid>
             </Box>
         </Box>
-    )
+    );
 }

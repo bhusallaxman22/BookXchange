@@ -1,8 +1,8 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 import AppBarred from '../AppBar/AppBarred';
-import { Typography, Grid, TextField, Button, FormControl, InputAdornment, Container } from '@material-ui/core';
+import { Typography, Grid, TextField, Button, FormControl, InputAdornment, Container } from '@mui/material';
 // import data from '../data';
 import { Link, useHistory } from 'react-router-dom';
 import Tags from "./Tag";
@@ -68,7 +68,7 @@ export default function Add({ isLoggedin }) {
                         container
                         alignContent="center"
                         alignItems="center"
-                        justify="center"
+                        justifyContent="center"
                     >
                         <form
                             //  method="post" action="/datas"
@@ -190,5 +190,5 @@ export default function Add({ isLoggedin }) {
             </Box>
             <Navigation />
         </Box>
-    )
+    );
 }

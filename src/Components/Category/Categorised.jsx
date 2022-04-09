@@ -1,8 +1,8 @@
 // Component to display Home component with sub_faculty filter from ../data.js
-import { Card, CardActionArea, Typography, Button, CardActions, CardMedia, CardContent, Divider, Box, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import WriteIcon from "@material-ui/icons/EditOutlined";
-import PostedIcon from "@material-ui/icons/PersonOutlineTwoTone";
+import { Card, CardActionArea, Typography, Button, CardActions, CardMedia, CardContent, Divider, Box, Grid } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import WriteIcon from "@mui/icons-material/EditOutlined";
+import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 // import { Link } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 import AppBarHome from '../AppBar/AppBarHome';
@@ -95,7 +95,7 @@ function Categorised(props) {
             <Grid spacing={3}
                 container
                 direction="row"
-                justify="center"
+                justifyContent="center"
                 alignItems="center" >
                 {displayData}
             </Grid>
