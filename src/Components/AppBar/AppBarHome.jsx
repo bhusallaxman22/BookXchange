@@ -1,18 +1,15 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, IconButton, Badge, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { ShoppingCartRounded, Favorite } from '@mui/icons-material'
+import { ShoppingCartRounded } from '@mui/icons-material'
 import CartShow from '../Cart/CartShow';
-import WishShow from '../Cart/WishShow';
 export default function AppBarHome({
     isLoggedin,
     Cart,
     Wish,
     setCart,
-    setWish,
 }) {
     const [open, setOpen] = React.useState(false);
-    const [openWish, setOpenWish] = React.useState(false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -21,13 +18,8 @@ export default function AppBarHome({
     const handleClose = () => {
         setOpen(false);
     };
-    const handleOpenWish = () => {
-        setOpenWish(true);
-    };
 
-    const handleCloseWish = () => {
-        setOpenWish(false);
-    };
+
     return (
         <div>
             <AppBar position="static">
@@ -45,17 +37,6 @@ export default function AppBarHome({
                         </Badge>
                     </IconButton>
                     <CartShow open={open} handleClose={handleClose} handleOpen={handleOpen} cart={Cart} setCart={setCart} />
-                    <IconButton
-                        aria-label="show whitelist items"
-                        color="inherit"
-                        onClick={handleOpenWish}
-                        size="large">
-                        <Badge badgeContent={Wish.length} color="secondary">
-                            <Favorite />
-                        </Badge>
-                    </IconButton>
-                    <WishShow open={openWish} handleClose={handleCloseWish} handleOpen={handleOpenWish} cart={Wish} setCart={setWish} />
-
                     {!isLoggedin ? <Link style={{ textDecoration: 'none', textAnchor: 'unset' }} to={'/login'}> <Button color='secondary' >Login</Button></Link> : <Link style={{ textDecoration: 'none', textAnchor: 'unset' }} to={'/profile'}> <Button color='secondary' >Profile</Button></Link>}
                 </Toolbar>
             </AppBar>

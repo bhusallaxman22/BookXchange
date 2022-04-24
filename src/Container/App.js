@@ -17,7 +17,7 @@ import {
   StyledEngineProvider,
   createTheme,
   CssBaseline,
-  adaptV4Theme,
+
 } from '@mui/material';
 import MyBooks from '../Components/Profile/myBooks';
 import Edit from '../Components/Profile/Edit';
@@ -31,30 +31,7 @@ import Category from '../Components/Category/Category';
 import Navigation from '../Components/Navigation/Navigation';
 import Fuse from 'fuse.js';
 import Categorised from '../Components/Category/Categorised';
-// import { useParams } from 'react-router-dom';
-
-// const GRAPH_DATA =
-//   gql`
-//   {
-//     books {
-//       id
-//       name
-//       genre
-//       author
-//       postedBy{
-//         id
-//         firstName
-//         lastName
-//         bookSet{
-//           name
-//         }
-//       }
-//       description
-//       originalPrice
-//       discountedPrice
-//     }
-//   }
-//     `
+import Description  from '../Components/Description';
 
 function App() {
   const [darkState, setDarkState] = useState(false);
@@ -68,7 +45,6 @@ function App() {
   // FOR HOME.JSX
   const [datas, setdata] = useState([]);
   const [Cart, setCart] = useState([]);
-  const [Wish, setWish] = useState([]);
   const [category, setCategory] = useState('All');
 
   const unique = chain(datas).map('faculty').flatten().uniq().value();
@@ -93,15 +69,14 @@ function App() {
 
   const addToCart = (data) => {
     const newCart = [...Cart, data];
-    setCart(newCart);
-    console.log(newCart);
+    // donot add data with samw id
+    const uniqueCart = newCart.filter((item, index) => {
+      return newCart.indexOf(item) === index;
+    });
+    setCart(uniqueCart);
   }
-  const addToWish = data => {
-    const newWish = [...Wish, data];
-    setWish(newWish);
-    console.log(newWish);
-  }
-  const darkTheme = createTheme(adaptV4Theme({
+
+  const darkTheme = createTheme({
     palette: {
       mode: palletType,
       primary: {
@@ -111,7 +86,7 @@ function App() {
         main: mainSecondaryColor
       }
     }
-  }));
+  });
   const fuse = new Fuse(filteredResult, {
     keys: ["name", "faculty", "sub_faculty", "description", "year_sem"],
     includeScore: true,
@@ -137,6 +112,7 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
+
         <Router>
           <Switch>
             <Route exact path="/">
@@ -146,11 +122,8 @@ function App() {
                 datas={sBook}
                 Cart={Cart}
                 unique={unique}
-                Wish={Wish}
                 addToCart={addToCart}
-                addToWish={addToWish}
                 setCart={setCart}
-                setWish={setWish}
                 category={category}
                 setCategory={setCategory}
                 setSearchField={onChangeSearch}
@@ -190,16 +163,19 @@ function App() {
             </Route>
             <Route path="/books/:id" >
               <Categorised isLoggedin={isLoggedin} data={data} addToCart={addToCart}
-                addToWish={addToWish}
                 Cart={Cart}
-                Wish={Wish}
                 setCart={setCart}
-                setWish={setWish} />
+                />
+            </Route>
+            <Route path="/book/:id" >
+              <Description isLoggedin={isLoggedin} data={data} addToCart={addToCart}
+                Cart={Cart}
+                setCart={setCart}
+                />
             </Route>
           </Switch>
           <Navigation />
         </Router>
-
       </ThemeProvider>
     </StyledEngineProvider>
   );

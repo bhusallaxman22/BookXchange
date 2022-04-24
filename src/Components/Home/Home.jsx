@@ -9,14 +9,15 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@mui/material';
-import WriteIcon from "@mui/icons-material/EditOutlined";
+import { Select, MenuItem, FormControl, InputLabel, FormHelperText, Container } from '@mui/material';
 import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 import { Pagination } from '@mui/material';
 import Variants from '../Profile/Variant';
 import Divider from '@mui/material/Divider';
 import AppBarHome from '../AppBar/AppBarHome';
 import SearchBox from '../SearchBox/SearchBox';
+import { ArrowCircleRightOutlined, StarTwoTone } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 /**
 const books = gql`
@@ -36,14 +37,17 @@ const books = gql`
 // import data from "../data";
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        //yarn maxWidth: 180,
         width: 300,
-        maxHeight: 438,
+        minHeight: 300,
         margin: 10,
         borderRadius: 25
     },
     media: {
         height: 140,
+        // width: 100,
+        borderRadius: 25
+
     },
     title: {
         flexGrow: 1,
@@ -68,7 +72,7 @@ export default function Home({
 }) {
     const classes = useStyles();
     const [Page, setPage] = React.useState(1);
-    const [bookCount, setbookCount] = React.useState(4)
+    const [bookCount, setbookCount] = React.useState(8)
     function paginateGood(array, page_size, page_number) {
         // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
         return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -121,7 +125,21 @@ export default function Home({
                             </Select>
                             <FormHelperText>Select Genre.</FormHelperText>
                         </FormControl>
+                        {/* Featured Books beside the Menu */}
+                        <Box style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'flex-end',
+                            marginRight: '10px'
+                        }}>
+                         
+                        </Box>
                     </div>
+                    <Container>
+                                <Typography variant="h6" component="h6" color={"GrayText"} style={{ textAlign: "center", marginTop: '20px' }}>
+                                    Featured Books
+                                </Typography>
+                            </Container>
                     <Grid
                         container
                         direction="row"
@@ -132,42 +150,39 @@ export default function Home({
                                 <Variants />
                             </Box>
                         ) : (
-                                paginateGood(datas, bookCount, Page).map(data => <Card key={data.id} className={classes.root}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            className={classes.media}
-                                            image={`http://localhost:8000/media/images/harry.jpg`}
-                                            title={data.name}
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="h2">
-                                                {data.name}
-                                            </Typography>
-                                            <Typography variant="subtitle2" color="inherit" component="span">
-                                                <small><WriteIcon />Publication:{data.Publication}</small>
-                                            </Typography>
-                                            <Typography variant="subtitle1" color="inherit" component="p">
-                                                <small><PostedIcon />Faculty:</small> {data.faculty}
-                                            </Typography>
-                                            <Typography variant="subtitle2" color="inherit" component="strong">
-                                                <small>Price :</small>Rs.  {data.discountedPrice}
-                                            </Typography>
-                                            <Divider />
-                                            <Typography variant="body2" color="textSecondary" component="p">
-                                                {data.description}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                    <CardActions>
-                                        <Button size="medium" onClick={() => addToCart(data)} color="primary">
-                                            Add To Cart
-                                </Button>
-                                        <Button size="medium" onClick={() => addToWish(data)} color="primary">
-                                            Add To Wishlist
-                </Button>
-                                    </CardActions>
-                                </Card>
-                                ))}
+                            paginateGood(datas, bookCount, Page).map(data => <Card key={data.id} className={classes.root}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={classes.media}
+                                        image={`https://picsum.photos/200/300?random=${data.id}`}
+                                        title={data.name}
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {data.name}
+                                        </Typography>
+
+                                        <Typography variant="subtitle1" color="inherit" component="p">
+                                            <small><PostedIcon />Faculty:</small> {data.faculty}
+                                        </Typography>
+                                        <Typography variant="subtitle2" component="strong" alignContent={"center"}>
+                                            <small > <StarTwoTone/> Credit :</small> <span style={{color:"blue"}}>{data.discountedPrice}</span> 
+                                        </Typography>
+                                        <Divider />
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions>
+                                    <Button size="medium" onClick={() => addToCart(data)} color="primary">
+                                        Add To Cart
+                                    </Button>
+                                    <Link to={`/book/${data.id}`}>
+                                    <Button size="medium" color="primary">
+                                        Read More<ArrowCircleRightOutlined />
+                                    </Button>
+                                    </Link>
+                                </CardActions>
+                            </Card>
+                            ))}
                     </Grid><br />
                     <div
                         style={{ alignContent: 'center', textAlign: 'center', display: 'flex', justifyContent: 'center' }}
@@ -190,10 +205,10 @@ export default function Home({
                                 value={bookCount}
                                 onChange={handleCount}
                             >
-                                <MenuItem value={4}>4</MenuItem>
-                                <MenuItem value={6}>6</MenuItem>
                                 <MenuItem value={8}>8</MenuItem>
-                                <MenuItem value={10}>10</MenuItem>
+                                <MenuItem value={12}>12</MenuItem>
+                                <MenuItem value={20}>20</MenuItem>
+                                <MenuItem value={50}>50</MenuItem>
                             </Select>
                             <FormHelperText>books per page</FormHelperText>
                         </FormControl>

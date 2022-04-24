@@ -4,7 +4,7 @@ const data = [
         name: "Engineering Mathematics",
         description: "Text Book of engineering mathematics 1st semester of Tribhuvan University.",
         Publication: "K.E.C",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "2nd",
         faculty: "Engineering",
         sub_faculty: [
@@ -14,11 +14,11 @@ const data = [
         postedBy: "Laxman Bhusal",
     },
     {
-        id: 1,
+        id: 2,
         name: "Digital Logic",
         description: "Text Book of digital Logic mathematics 1st semester of Tribhuvan University.",
         Publication: "K.E.C",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "1st",
         faculty: "BSc",
         sub_faculty: [
@@ -28,11 +28,11 @@ const data = [
         postedBy: "Laxman Bhusal",
     },
     {
-        id: 1,
+        id: 3,
         name: "Statistics-I",
         description: "Text Book of digital Logic mathematics 1st semester of Tribhuvan University.",
         Publication: "K.E.C",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "2nd",
         faculty: "BSc",
         sub_faculty: [
@@ -41,11 +41,11 @@ const data = [
         discountedPrice: 200,
         postedBy: "Laxman Bhusal",
     }, {
-        id: 1,
+        id: 4,
         name: "Business Mathematics",
         description: "Text Book of Business Mathematics 1st year of Tribhuvan University.",
         Publication: "Buddha Publication",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "1st",
         faculty: "Accounting",
         sub_faculty: [
@@ -54,11 +54,11 @@ const data = [
         discountedPrice: 200,
         postedBy: "Laxman Bhusal",
     }, {
-        id: 1,
+        id: 5,
         name: "Principal of Management",
         description: "Text Book of POM 1st year of Tribhuvan University.",
         Publication: "",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "2nd",
         faculty: "Accounting",
         sub_faculty: [
@@ -67,11 +67,11 @@ const data = [
         discountedPrice: 200,
         postedBy: "Laxman Bhusal",
     }, {
-        id: 1,
+        id: 6,
         name: "Introduction To Anatomy",
         description: "Text Book of IOA 1st semester of Tribhuvan University.",
         Publication: "K.E.C",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "2nd",
         faculty: "Medecine",
         sub_faculty: [
@@ -80,11 +80,11 @@ const data = [
         discountedPrice: 200,
         postedBy: "Laxman Bhusal",
     }, {
-        id: 1,
+        id: 7,
         name: "Digital Logic",
         description: "Text Book of digital Logic mathematics 1st semester of Tribhuvan University.",
         Publication: "K.E.C",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/e8/Karodaun_Kasturi_book_cover.jpg",
+        image: "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/06/how-to-write-a-book.jpeg",
         year_sem: "2nd",
         faculty: "IT",
         sub_faculty: [

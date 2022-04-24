@@ -18,9 +18,6 @@ const useStyles = makeStyles({
 export default function Navigation() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const handleClickNav = () => {
-    window.navigator.vibrate(50);
-  }
   return (
     <div className="nav-botn">
       <BottomNavigation
@@ -31,9 +28,9 @@ export default function Navigation() {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction onClick={handleClickNav} value="home" component={Link} to="/" label="Home" icon={<HomeIcon />} />
-        <BottomNavigationAction showLabel value="add" component={Link} label="Categories" to={"/categories"} icon={<List />} />
-        <BottomNavigationAction onClick={handleClickNav} value="profile" component={Link} to="/profile" label="Profile" icon={<ProfileIcon />} />
+        <BottomNavigationAction showLabel  value="home" component={Link} to={"/"} label="Home" icon={<HomeIcon />} />
+        <BottomNavigationAction showLabel  value="add" component={Link} label="Categories" to={"/categories"} icon={<List />} />
+        <BottomNavigationAction showLabel  value="profile" component={Link} to={"/profile"} label="Profile" icon={<ProfileIcon />} />
       </BottomNavigation>
     </div>
   );
