@@ -14,25 +14,11 @@ import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 import { Pagination } from '@mui/material';
 import Variants from '../Profile/Variant';
 import Divider from '@mui/material/Divider';
-import AppBarHome from '../AppBar/AppBarHome';
 import SearchBox from '../SearchBox/SearchBox';
 import { ArrowCircleRightOutlined, StarTwoTone } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-/**
-const books = gql`
-  {
-    books{
-        name
-        author{
-            author
-        }
 
-    }
-    }
-  }
-`;
-**/
 
 // import data from "../data";
 const useStyles = makeStyles({
@@ -56,15 +42,9 @@ const useStyles = makeStyles({
 
 
 export default function Home({
-    isLoggedin,
     datas,
-    Cart,
-    Wish,
     addToCart,
-    addToWish,
-    setCart,
     unique,
-    setWish,
     setSearchField,
     setCategory,
     category,
@@ -73,6 +53,7 @@ export default function Home({
     const classes = useStyles();
     const [Page, setPage] = React.useState(1);
     const [bookCount, setbookCount] = React.useState(8)
+    const linkStyle = {color:"inherit", textDecoration:"none"}
     function paginateGood(array, page_size, page_number) {
         // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
         return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -167,7 +148,7 @@ export default function Home({
                                     <Button size="medium" onClick={() => addToCart(data)} color="primary">
                                         Add To Cart
                                     </Button>
-                                    <Link to={`/book/${data.id}`}>
+                                    <Link to={`/book/${data.id}`} style = {linkStyle}>
                                     <Button size="medium" color="primary">
                                         Read More<ArrowCircleRightOutlined />
                                     </Button>
@@ -178,7 +159,6 @@ export default function Home({
                     </Grid><br />
                     <div
                         style={{ alignContent: 'center', textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-
                     >
                         <Pagination
                             count={count}

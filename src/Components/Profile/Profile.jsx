@@ -33,7 +33,6 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
     return (
         <Box>
             <Box >
-                <AppBarred isLoggedin={isLoggedin} darkState={darkState} handleThemeChange={handleThemeChange} />
                 <Box className="main-content">
                     <Container className="container">
                         <Grid

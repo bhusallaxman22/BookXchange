@@ -1,9 +1,8 @@
 // Books description from data.js in material ui
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Grid, Typography, Box, Container, } from "@mui/material"
+import { Grid, Typography, Box, Container, Card, } from "@mui/material"
 import RelatedBooks from '../RelatedBooks/RelatedBooks';
-import AppBarHome from '../AppBar/AppBarHome';
 import { useParams } from 'react-router-dom';
 import data from "../data"
 // Styles
@@ -12,6 +11,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: '0px',
     margin: '0px',
+    height: "95vh",
+    overflowY: "scroll"
   },
   paper: {
     padding: theme.spacing(2),
@@ -32,11 +33,11 @@ function Description(props) {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" p={1} m={1}>
-            <img src={book.image} alt="book" width="100%" height="100%" />
+              <img src={book.image} alt="book" width="100%" height="100%" />
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box display="flex" flexDirection="column"  p={1} m={1}>
+            <Box display="flex" flexDirection="column" p={1} m={1}>
               <Typography variant="h4" component="h1" gutterBottom>
                 {book.name}
               </Typography>
@@ -52,8 +53,8 @@ function Description(props) {
               <Typography variant="h6" component="h2" gutterBottom>
                 Faculty: {book.faculty}
               </Typography>
-              <Typography variant="h6" component="h2" gutterBottom>
-                Sub-Faculty: {book.sub_faculty}
+              <Typography variant="h6" component={"h2"} gutterBottom>
+                Sub-Faculty:<span style = {{ boxShadow:"1px", border:"1px" }}>{book.sub_faculty} </span>
               </Typography>
               <Typography variant="h6" component="h2" gutterBottom>
                 Price: {book.discountedPrice}
@@ -68,7 +69,7 @@ function Description(props) {
       <Typography variant="h6" component="h2" gutterBottom>
         Related Books
       </Typography>
-      <RelatedBooks props={props} addToCart={props.addToCart} book={book} /> 
+      <RelatedBooks props={props} addToCart={props.addToCart} book={book} />
     </Box>
   );
 }

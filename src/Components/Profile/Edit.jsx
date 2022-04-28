@@ -33,7 +33,6 @@ export default function Add({ isLoggedin, props }) {
 
     return hmmp !== undefined ? < Box >
         <Box >
-            <AppBarred isLoggedin={isLoggedin} />
             <Box className="main-content">
                 <Typography style={{ textAlign: 'center' }} component="h2" variant="subtitle2">
                     Add a Book:

@@ -10,9 +10,10 @@ import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-        height: '95vh',
+        height: 'auto',
         padding: '0px',
         margin: '0px',
+        marginBottom:"10px",
     },
     card: {
         minHeight: 300,

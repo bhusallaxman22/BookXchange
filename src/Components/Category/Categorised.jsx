@@ -1,12 +1,12 @@
 // Component to display Home component with sub_faculty filter from ../data.js
 import { Card, CardActionArea, Typography, Button, CardActions, CardMedia, CardContent, Divider, Box, Grid } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import WriteIcon from "@mui/icons-material/EditOutlined";
+import { makeStyles } from '@mui/styles';
 import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
+import WriteIcon from "@mui/icons-material/Edit";
 // import { Link } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 import AppBarHome from '../AppBar/AppBarHome';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom/';
 
 const useStyles = makeStyles({
     root: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 function Categorised(props) {
     const [data, setData] = useState([]);
     const [sub_faculty, setSubFaculty] = useState([]);
+    const mainStyle = { height: "82vh", marginTop: "20px", overflow:"scroll" }
     const classes = useStyles();
     const { id } = useParams();
     useEffect(() => {
@@ -83,19 +84,11 @@ function Categorised(props) {
     );
 
     return (
-        <Box style={{ height: "90vh" }}>
-            <AppBarHome
-                isLoggedin={props.isLoggedin}
-                Cart={props.Cart}
-                Wish={props.Wish}
-                setCart={props.setCart}
-                setWish={props.setWish}
-                setSearchField={props.setSearchField}
-            />
+        <Box style={mainStyle}>
             <Grid spacing={3}
                 container
                 direction="row"
-                justifyContent="center"
+                justify="center"
                 alignItems="center" >
                 {displayData}
             </Grid>

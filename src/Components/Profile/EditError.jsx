@@ -8,7 +8,9 @@ export default function EditError() {
             justifyContent: 'center',
             textAlign: 'center',
             alignContent: 'center',
-            alignItems: "center"
+            alignItems: "center",
+            height: '85vh'
+
         }}>
             <div>
                 <p style={{ color: 'red' }}>Looks like you directly jumped to this page.</p>
