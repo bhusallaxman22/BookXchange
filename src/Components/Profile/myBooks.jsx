@@ -13,7 +13,7 @@ import WriteIcon from "@mui/icons-material/EditOutlined";
 import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 import data from '../data';
 import Variants from '../Profile/Variant';
-import { Divider, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Divider,IconButton } from '@mui/material';
 import { ChevronLeftRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
@@ -41,14 +41,7 @@ export default function MyBooks() {
 
     return (
         <Box>
-            <AppBar position="static">
-                <Toolbar>
-                    <Link to={"/profile"}>
-                        <IconButton size="large">
-                            <ChevronLeftRounded />
-                        </IconButton></Link>
-                </Toolbar>
-            </AppBar>
+
             <Box>
                 <Grid className="inner-content"
                     container

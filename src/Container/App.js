@@ -31,11 +31,13 @@ import Category from '../Components/Category/Category';
 import Navigation from '../Components/Navigation/Navigation';
 import Fuse from 'fuse.js';
 import Categorised from '../Components/Category/Categorised';
-import Description  from '../Components/Description';
+import Description from '../Components/Description';
+import Single from '../Components/Single'
+import AppBarHome from '../Components/AppBar/AppBarHome';
 
 function App() {
   const [darkState, setDarkState] = useState(false);
-  const [isLoggedin, setLogin] = useState(true);
+  const [isLoggedin, setLogin] = useState(false);
   // const [SearchField, setSearchField] = useState('');
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
@@ -112,12 +114,18 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-
+   
         <Router>
+        <AppBarHome isLoggedin={isLoggedin}
+          Cart={Cart}
+          setCart={setCart}
+          // setSearchField={setSearchField}
+           />
           <Switch>
+
             <Route exact path="/">
               <Home
-                isLoggedin={isLoggedin} 
+                isLoggedin={isLoggedin}
                 setLogin={setLogin}
                 datas={sBook}
                 Cart={Cart}
@@ -142,6 +150,7 @@ function App() {
               <Login
                 userInfo={userInfo}
                 setUser={setUser}
+                Cart={Cart}
                 isLoggedin={isLoggedin}
                 setLogin={setLogin}
               />
@@ -151,6 +160,9 @@ function App() {
             </Route>
             <Route path="/myBooks">
               <MyBooks />
+            </Route>
+            <Route path="/single">
+              <Single />
             </Route>
             <Route path="/edit" >
               <Edit />
@@ -165,13 +177,13 @@ function App() {
               <Categorised isLoggedin={isLoggedin} data={data} addToCart={addToCart}
                 Cart={Cart}
                 setCart={setCart}
-                />
+              />
             </Route>
             <Route path="/book/:id" >
               <Description isLoggedin={isLoggedin} data={data} addToCart={addToCart}
                 Cart={Cart}
                 setCart={setCart}
-                />
+              />
             </Route>
           </Switch>
           <Navigation />

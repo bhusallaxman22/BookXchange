@@ -13,12 +13,14 @@ const useStyles = makeStyles(theme => ({
         height: '95vh',
         padding: '0px',
         margin: '0px',
-        overflow: 'hidden',
     },
+    card: {
+        minHeight: 300,
+    },
+
     media: {
-        height: 100,
-        // width: 100,
-        borderRadius: 25
+        height: 140,
+        borderRadius: 10,
 
     },
     paper: {
@@ -44,7 +46,7 @@ function RelatedBooks(props){
             <Grid container direction="row" spacing={3}>
                 {books.map(data=>(
                     <Grid item key={data.id}>
-                        <Card>
+                        <Card className={classes.card}>
                         <CardActionArea>
                                     <CardMedia
                                         className={classes.media}

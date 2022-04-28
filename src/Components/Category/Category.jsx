@@ -68,7 +68,6 @@ export default function Category({ isLoggedin }) {
     return (
         <Box >
             <Box >
-                <AppBarred isLoggedin={isLoggedin} />
                 <Box className="main-content">
                     <Grid
                         container

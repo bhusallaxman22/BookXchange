@@ -1,7 +1,7 @@
 {
   "name": "bookstore",
   "version": "0.1.0",
-  "proxy": "http://localhost:8000",
+  "proxy": "http://192.168.10.64:8000",
   "private": true,
   "author": "Laxman Bhusal",
   "description": "A web app to buy and sell second hand books",
@@ -17,7 +17,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "apollo-boost": "^0.4.9",
-    "axios": "^0.19.2",
+    "axios": "^0.27.1",
     "firebase": "^7.14.6",
     "fuse.js": "^6.5.3",
     "graphql": "^15.1.0",

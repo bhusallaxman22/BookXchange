@@ -94,14 +94,6 @@ export default function Home({
     return (
         <Box>
             <Box>
-                <AppBarHome
-                    isLoggedin={isLoggedin}
-                    Cart={Cart}
-                    Wish={Wish}
-                    setCart={setCart}
-                    setWish={setWish}
-                    setSearchField={setSearchField}
-                />
                 <Box className="main-content">
                     <div style={{
                         display: 'flex',
