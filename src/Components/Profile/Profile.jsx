@@ -78,8 +78,8 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
             }
             )
             .catch(err => console.log(err))
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[data.id] )
+        // eslint-disable-next-line
+    }, [data.id])
     const aliDheraiPadding = { padding: '20px', textAlign: 'center' }
     const nayaprofileimg = { height: "200px", width: "200px", borderRadius: "50%", margin: "10px" }
     function handleLogout() {
@@ -120,123 +120,142 @@ export default function Profile({ darkState, handleThemeChange, isLoggedin, setL
             .catch(err => console.log(err))
     }
     return (
-        <Box style={{ marginTop: '15px' }}>
-            <Container maxWidth="lg">
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" p={1} m={1}>
-                            <img style={nayaprofileimg} src={data.image} alt="book" width="100%" height="100%" />
-                        </Box>
-                        <Typography variant="h6" component="h2" gutterBottom align='center'>
-                            User ID: {data.id}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                        <Box display="flex" flexDirection="column" p={1} m={1}>
+        <Box style={{ marginTop: '15px', height: "85vh",overflow:"scroll" }}>
+            {isLoggedin ?
+                <Container maxWidth="lg">
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={4}>
+                            <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" p={1} m={1}>
+                                <img style={nayaprofileimg} src={data.image} alt="book" width="100%" height="100%" />
+                            </Box>
+                            <Typography variant="h6" component="h2" gutterBottom align='center'>
+                                User ID: {data.id}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={5}>
+                            <Box display="flex" flexDirection="column" p={1} m={1}>
 
-                            <Typography variant="h4" component="h1" gutterBottom>
-                                {data.first_name} {data.last_name}
-                            </Typography>
-                            <Typography variant="p" component="p" gutterBottom>
-                                {data.note}
-                            </Typography>
-                            <Typography variant="h6" component="h5" gutterBottom>
-                                <b>Phone No:</b> {data.phone}
-                            </Typography>
-                            <Typography variant="h6" component="h5" gutterBottom>
-                                <b>Level:</b> {data.level}
-                            </Typography>
-                            <Typography variant="h6" component="h5" gutterBottom>
-                                <b>Faculty:</b> {data.faculty}
-                            </Typography>
-                            <Typography variant="h6" component="h5" gutterBottom>
-                                <b>Credit:</b> {data.credit}
-                            </Typography>
+                                <Typography variant="h4" component="h1" gutterBottom>
+                                    {data.first_name} {data.last_name}
+                                </Typography>
+                                <Typography variant="p" component="p" gutterBottom>
+                                    {data.note}
+                                </Typography>
+                                <Typography variant="h6" component="h5" gutterBottom>
+                                    <b>Phone No:</b> {data.phone}
+                                </Typography>
+                                <Typography variant="h6" component="h5" gutterBottom>
+                                    <b>Level:</b> {data.level}
+                                </Typography>
+                                <Typography variant="h6" component="h5" gutterBottom>
+                                    <b>Faculty:</b> {data.faculty}
+                                </Typography>
+                                <Typography variant="h6" component="h5" gutterBottom>
+                                    <b>Credit:</b> {data.credit}
+                                </Typography>
 
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
 
-                        <Link to={"/add"} style={linkStyle}><Button variant="contained" color="primary" style={{ borderRadius: "10px", padding: "10px", margin: "10px" }}>
-                            Add a Book
-                        </Button>
-                        </Link>
-                        <Button variant="contained" color="success" style={{ borderRadius: "10px", padding: "10px", margin: "10px" }}>
-                            Edit Profile
-                        </Button>
-                        <IconButton onClick={() => handleLogout()} variant="contained" color="success" >
-                            <PowerSettingsNew />
-                        </IconButton>
-                    </Grid>
-                </Grid>
-                <Grid style={inviteRaadd}>
-                    <Grid item xs={12} sm={12}>
-                        <Typography variant="h6" component="h2" gutterBottom>
-                            You Can Invite Upto Two frinds
-                        </Typography>
-                        <Paper
-                            component="form"
-                            onSubmit={(e) => handleEmSubmit(e)}
-                            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%', border: '1px solid #ccc', borderRadius: '4px' }}
-                        >
-                            <InputBase
-                                sx={{ ml: 1, flex: 1 }}
-                                placeholder="Enter Friends Email Address"
-                                inputProps={{ 'aria-label': 'enter email address' }}
-                                value={femail}
-                                onChange={(e) => setfemail(e.target.value)}
-                            />
-                            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                                <Share />
+                            <Link to={"/add"} style={linkStyle}><Button variant="contained" color="primary" style={{ borderRadius: "10px", padding: "10px", margin: "10px" }}>
+                                Add a Book
+                            </Button>
+                            </Link>
+                            <Button variant="contained" color="success" style={{ borderRadius: "10px", padding: "10px", margin: "10px" }}>
+                                Edit Profile
+                            </Button>
+                            <IconButton onClick={() => handleLogout()} variant="contained" color="success" >
+                                <PowerSettingsNew />
                             </IconButton>
-                        </Paper>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid style={aliDheraiPadding}>
-                    <Typography variant="h4" component="h2" gutterBottom>
-                        My Books
-                    </Typography>
-                    <Grid container spacing={2}>
+                    <Grid style={inviteRaadd}>
+                        <Grid item xs={12} sm={12}>
+                            <Typography variant="h6" component="h2" gutterBottom>
+                                You Can Invite Upto Two frinds
+                            </Typography>
+                            {data.invites !== 2 ?
+                             <Paper
+                             component="form"
+                             onSubmit={(e) => handleEmSubmit(e)}
+                             sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%', border: '1px solid #ccc', borderRadius: '4px' }}
+                         >
+                             <InputBase
+                                 sx={{ ml: 1, flex: 1 }}
+                                 placeholder="Enter Friends Email Address"
+                                 inputProps={{ 'aria-label': 'enter email address' }}
+                                 value={femail}
+                                 onChange={(e) => setfemail(e.target.value)}
+                             />
+                             <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                                 <Share />
+                             </IconButton>
+                         </Paper>
+                            :
+                            <Typography variant="h6" component="subtitle" gutterBottom>
+                                You already used your two invites
+                            </Typography>
+                            }
+                        </Grid>
+                    </Grid>
+                    <Grid style={aliDheraiPadding}>
+                        <Typography variant="h4" component="h2" gutterBottom>
+                            My Books
+                        </Typography>
+                        <Grid container spacing={2}>
 
-                        {mybooks.map((data, index) => {
-                            return (
-                                <Card key={index} style={cardStyle}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            style={cardMediaStyle}
-                                            image={data.image}
-                                            title={data.bname}
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="h2">
-                                                {data.bname}
-                                            </Typography>
+                            {mybooks.map((data, index) => {
+                                return (
+                                    <Card key={index} style={cardStyle}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                style={cardMediaStyle}
+                                                image={data.image}
+                                                title={data.bname}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="h2">
+                                                    {data.bname}
+                                                </Typography>
 
-                                            <Typography variant="subtitle1" color="inherit" component="p">
-                                                <small><PostedIcon />Faculty:</small> {data.category}
-                                            </Typography>
-                                            <Typography variant="subtitle2" component="strong" alignContent={"center"}>
-                                                <small > <StarTwoTone /> Credit :</small> <span style={{ color: "blue" }}>{data.credit}</span>
-                                            </Typography>
-                                            <Divider />
-                                        </CardContent>
-                                    </CardActionArea>
-                                    <CardActions>
-                                        <Button size="medium" onClick={() => soldOut(data)} color="primary">
-                                            Sold Out
-                                        </Button>
-                                        <Link to={`/book/${data.id}`} style={linkStyle}>
-                                            <Button size="medium" color="primary">
-                                                Read More<ArrowCircleRightOutlined />
+                                                <Typography variant="subtitle1" color="inherit" component="p">
+                                                    <small><PostedIcon />Faculty:</small> {data.category}
+                                                </Typography>
+                                                <Typography variant="subtitle2" component="strong" alignContent={"center"}>
+                                                    <small > <StarTwoTone /> Credit :</small> <span style={{ color: "blue" }}>{data.credit}</span>
+                                                </Typography>
+                                                <Divider />
+                                            </CardContent>
+                                        </CardActionArea>
+                                        <CardActions>
+                                            <Button size="medium" onClick={() => soldOut(data)} color="primary">
+                                                Sold Out
                                             </Button>
-                                        </Link>
-                                    </CardActions>
-                                </Card>
-                            )
-                        })}
+                                            <Link to={`/book/${data.id}`} style={linkStyle}>
+                                                <Button size="medium" color="primary">
+                                                    Read More<ArrowCircleRightOutlined />
+                                                </Button>
+                                            </Link>
+                                        </CardActions>
+                                    </Card>
+                                )
+                            })}
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container>
+                </Container>
+                : <Container maxWidth="lg">
+                    <Typography variant="h6" component="h2" gutterBottom align='center'>
+                        Please Login to see your profile
+                    </Typography>
+                    <Link to={"/login"} style={linkStyle}>
+                        <Button variant="contained" color="primary" style={{ borderRadius: "10px", padding: "10px", margin: "10px" }}>
+                            Login
+                        </Button>
+                    </Link>
+                </Container>
+            }
+
         </Box>
     )
 }

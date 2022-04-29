@@ -1,6 +1,6 @@
 import { AccountBoxOutlined } from '@mui/icons-material'
 import { Alert, Avatar, Button, Checkbox, FormControlLabel, Grid, Paper, Snackbar, TextField, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import React from 'react'
 // import emails from "./emails"
 import axios from 'axios'
@@ -59,6 +59,8 @@ function SignUp(props) {
                 setOpen(true)
             })
     }
+    const history = useHistory();
+
     function handleSubmit(e) {
         e.preventDefault();
         async function postData() {
@@ -76,6 +78,8 @@ function SignUp(props) {
                         setMsg("User with this email already exists");
                         setOpen(true)
 
+                    } else if (res.status === 200) {
+                        history.push('/login')
                     }
 
                     console.log(res)
