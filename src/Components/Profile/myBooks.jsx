@@ -12,9 +12,9 @@ import Grid from '@mui/material/Grid';
 import WriteIcon from "@mui/icons-material/EditOutlined";
 import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 import data from '../data';
+import axios from 'axios';
 import Variants from '../Profile/Variant';
-import { Divider,IconButton } from '@mui/material';
-import { ChevronLeftRounded } from '@mui/icons-material';
+import { Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
     root: {
@@ -35,9 +35,14 @@ export default function MyBooks() {
     const classes = useStyles();
     const [datas, setdata] = useState([])
     useEffect(() => {
-        setdata(data);
+        axios.get('/api/v1/user/books')
+            .then(res => {
+                console.log(res.data)
+                setdata(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [datas])
         console.log("effect")
-    }, [])
 
     return (
         <Box>
@@ -71,10 +76,7 @@ export default function MyBooks() {
                                             <small><PostedIcon />Posted by:</small>  {data.postedBy}
                                         </Typography>
                                         <Typography variant="subtitle2" color="inherit" component="p">
-                                            <small>Original Price :</small>Rs.  {data.originalPrice}
-                                        </Typography>
-                                        <Typography variant="subtitle2" color="inherit" component="strong">
-                                            <small>Discounted Price :</small>Rs.  {data.discountedPrice}
+                                            <small>Credit Point :</small>  {data.discountedPrice}
                                         </Typography>
                                         <Divider />
                                         <Typography variant="body2" color="textSecondary" component="p">

@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 function RelatedBooks(props){
     const classes = useStyles();
     const [books,setBooks] = React.useState([]);
-
+const linkStyle = { textDecoration: 'none', }
     React.useEffect(()=>{
         setBooks(data=>{
             return datas.filter(booke=>{
@@ -72,7 +72,7 @@ function RelatedBooks(props){
                                     <Button size="medium" onClick={() => props.addToCart(data)} color="primary">
                                         Add To Cart
                                     </Button>
-                                    <Link to={`/book/${data.id}`}>
+                                    <Link to={`/book/${data.id}`} style={linkStyle}>
                                     <Button size="medium" color="primary">
                                         Read More<ArrowCircleRightOutlined />
                                     </Button>

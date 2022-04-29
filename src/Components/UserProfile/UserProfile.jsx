@@ -2,11 +2,8 @@ import React from 'react';
 import Navigation from '../Navigation/Navigation';
 import {
     Box,
-    // ListItem,
-    // ListItemIcon,
+
     ListSubheader,
-    // ListItemSecondaryAction,
-    // ListItemText,
     Grid,
     Container,
     Typography,
@@ -16,15 +13,12 @@ import {
     CardMedia,
     Divider,
     List,
-    // Switch,
-    //  IconButton
 } from '@mui/material';
 import Variants from '../Profile/Variant';
 import makeStyles from '@mui/styles/makeStyles';
 import { SchoolRounded, Home, Person } from '@mui/icons-material'
-// import profileData from './profileData';
 import AppBarred from '../AppBar/AppBarred';
-// import { Link } from 'react-router-dom';
+import axios from 'axios';
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
@@ -38,13 +32,24 @@ const useStyles = makeStyles({
         flexGrow: 1,
     }
 });
-export default function UserProfile({ isLoggedin, data }) {
+export default function UserProfile({ isLoggedin }) {
     const classes = useStyles();
-    // const [data, setdata] = React.useState([]);
-    // React.useEffect(() => {
-    //     setdata(data);
-    // }, []);
-    // const profileData = data.postedBy
+    const [profileData, setProfileData] = React.useState([]);
+    React.useEffect(() => {
+        axios.get('/api/v1/user/', {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                console.log(res.data)
+                setProfileData(res.data)
+
+            })
+            .catch(err => console.log(err))
+
+    }, [profileData])
+
     return (
         <Box>
             <Box >
@@ -59,8 +64,8 @@ export default function UserProfile({ isLoggedin, data }) {
                             className="row">
                             <Card className={classes.root}>
                                 <List subheader={<ListSubheader>Profile</ListSubheader>} className={classes.root}>
-                                </List>{(!data.length ? <Variants /> : (
-                                    data.map(sara => {
+                                </List>{(!profileData.length ? <Variants /> : (
+                                    profileData.map(sara => {
                                         const data = sara.postedBy
                                         return <CardActionArea key={data.name}>
                                             <CardMedia

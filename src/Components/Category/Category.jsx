@@ -7,7 +7,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import Box from "@mui/material/Box";
-import AppBarred from '../AppBar/AppBarred';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
@@ -68,7 +67,7 @@ export default function Category({ isLoggedin }) {
     return (
         <Box >
             <Box >
-                <Box className="main-content">
+                <Box className="main-content" style={{marginTop:'10px'}}>
                     <Grid
                         container
                         alignContent="center"
@@ -79,7 +78,7 @@ export default function Category({ isLoggedin }) {
                             component="nav"
                             aria-labelledby="nested-list-subheader"
                             subheader={
-                                <ListSubheader component="div" id="nested-list-subheader">
+                                <ListSubheader component="div" id="nested-list-subheader" style={{fontSize:'20px'}}>
                                     Select A Category
                                 </ListSubheader>
                             }
@@ -112,7 +111,7 @@ export default function Category({ isLoggedin }) {
                                 <ListItemIcon>
                                     <LocalHospitalOutlined />
                                 </ListItemIcon>
-                                <ListItemText primary="Medecine" />
+                                <ListItemText primary="Medicine" />
                                 {openM ? <ExpandLess /> : <ExpandMore />}
                             </ListItem>
                             <Collapse in={openM} timeout="auto" unmountOnExit>

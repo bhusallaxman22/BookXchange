@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, } from 'react-router-dom'
 import {
   orange,
   blue,
@@ -19,13 +19,11 @@ import {
   CssBaseline,
 
 } from '@mui/material';
+import CheckOut from "../Components/CheckOut/CheckOut";
+import axios from 'axios';
 import MyBooks from '../Components/Profile/myBooks';
 import Edit from '../Components/Profile/Edit';
 import { chain } from "lodash";
-// import { useQuery } from '@apollo/react-hooks';
-// import { gql } from 'apollo-boost';
-// import { useQuery } from '@apollo/react-hooks';
-import data from '../Components/data'
 import UserProfile from '../Components/UserProfile/UserProfile';
 import Category from '../Components/Category/Category';
 import Navigation from '../Components/Navigation/Navigation';
@@ -43,35 +41,68 @@ function App() {
   const mainPrimaryColor = darkState ? orange[500] : blue[500];
   const mainSecondaryColor = darkState ? deepOrange[900] : deepPurple[500];
   const [searchResult, setSearchResult] = useState([]);
-
   // FOR HOME.JSX
-  const [datas, setdata] = useState([]);
+  const [datas, setData] = useState([]);
   const [Cart, setCart] = useState([]);
   const [category, setCategory] = useState('All');
 
-  const unique = chain(datas).map('faculty').flatten().uniq().value();
+  const unique = chain(datas).map('category').flatten().uniq().value();
   const filteredResult = datas.filter((item) =>
-    category === 'All' ? data : (item.faculty === category)
+    category === 'All' ? datas : (item.category === category)
   );
 
   //GET USER INFO.
-  const [userInfo, setUser] = useState([]);
-
+  const [userInfo, setUser] = useState(null);
   let loading, error;
-  // useQuery(GRAPH_DATA);
-  // let graphBook;
-  // if (!loading) graphBook = data;
-
   useEffect(() => {
     var aaa = localStorage.getItem("dark");
     console.log("darkmode state from localStorage:", aaa);
     aaa === null ? aaa = false : setDarkState(JSON.parse(aaa));
-    setdata(data)
-  }, [])
+    // get books from api/v1/books
+    axios
+      .get('/api/v1/books')
+      .then((res) => {
+        // setData(res.data.data);
+        if (res.status === 200) {
+          setData(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    // setData(books);
+    console.log(localStorage.getItem('token'));
+    axios.get('/api/v1/account/profile', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => {
+        console.log(res.data)
+        if (res.status === 200) {
+          setUser(res.data)
+          localStorage.setItem("userName", res.data.first_tname + " " + res.data.last_name)
+          setLogin(true)
+        }
+        else {
+          setLogin(false)
+          setUser(null)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        setLogin(false)
+      }
+      )
 
+  }, [])
+  console.log(datas)
   const addToCart = (data) => {
+
+
+
     const newCart = [...Cart, data];
-    // donot add data with samw id
+    // donot add data with same id
     const uniqueCart = newCart.filter((item, index) => {
       return newCart.indexOf(item) === index;
     });
@@ -90,7 +121,7 @@ function App() {
     }
   });
   const fuse = new Fuse(filteredResult, {
-    keys: ["name", "faculty", "sub_faculty", "description", "year_sem"],
+    keys: ["bname", "category", "subcategory", "description", "author",],
     includeScore: true,
     threshold: 0.3,
   });
@@ -101,9 +132,6 @@ function App() {
 
   const sBook =
     searchResult.length > 0 ? searchResult.map((book) => book.item) : filteredResult;
-  // const filteredBooks = filteredResult.filter(book => {
-  //   return book.name.toLowerCase().includes(SearchField.toLowerCase());
-  // });
   const handleThemeChange = () => {
     setDarkState(!darkState);
     localStorage.setItem("dark", !darkState);
@@ -114,13 +142,13 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-   
+ 
         <Router>
-        <AppBarHome isLoggedin={isLoggedin}
-          Cart={Cart}
-          setCart={setCart}
-          // setSearchField={setSearchField}
-           />
+          <AppBarHome isLoggedin={isLoggedin}
+
+            Cart={Cart}
+            setCart={setCart}
+          />
           <Switch>
 
             <Route exact path="/">
@@ -136,21 +164,20 @@ function App() {
                 setCategory={setCategory}
                 setSearchField={onChangeSearch}
                 filteredResults={filteredResult}
-              // error={error}
-              // loading={loading}
               />
             </Route>
             <Route path="/profile">
               <Profile darkState={darkState} handleThemeChange={handleThemeChange} isLoggedin={isLoggedin} setLogin={setLogin} />
             </Route>
             <Route path="/add">
-              <Add isLoggedin={isLoggedin} setLogin={setLogin} />
+              <Add isLoggedin={isLoggedin} setLogin={setLogin} userInfo={userInfo} />
             </Route>
             <Route path="/login">
               <Login
                 userInfo={userInfo}
                 setUser={setUser}
                 Cart={Cart}
+
                 isLoggedin={isLoggedin}
                 setLogin={setLogin}
               />
@@ -167,20 +194,23 @@ function App() {
             <Route path="/edit" >
               <Edit />
             </Route>
+            <Route path="/checkout">
+              <CheckOut isLoggedin={isLoggedin} userInfo={userInfo} />
+            </Route>
             <Route path="/user/:id" >
-              <UserProfile data={datas} />
+              <UserProfile user={userInfo} setUser={setUser} />
             </Route>
             <Route path="/categories" >
               <Category isLoggedin={isLoggedin} />
             </Route>
             <Route path="/books/:id" >
-              <Categorised isLoggedin={isLoggedin} data={data} addToCart={addToCart}
+              <Categorised isLoggedin={isLoggedin} data={datas} addToCart={addToCart}
                 Cart={Cart}
                 setCart={setCart}
               />
             </Route>
             <Route path="/book/:id" >
-              <Description isLoggedin={isLoggedin} data={data} addToCart={addToCart}
+              <Description isLoggedin={isLoggedin} data={datas} addToCart={addToCart}
                 Cart={Cart}
                 setCart={setCart}
               />

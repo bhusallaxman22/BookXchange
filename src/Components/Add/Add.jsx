@@ -1,194 +1,188 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
 import Box from "@mui/material/Box";
-import AppBarred from '../AppBar/AppBarred';
-import { Typography, Grid, TextField, Button, FormControl, InputAdornment, Container } from '@mui/material';
+import { Typography, Grid, TextField, Button, Container } from '@mui/material';
 // import data from '../data';
-import { Link, useHistory } from 'react-router-dom';
-import Tags from "./Tag";
-export default function Add({ isLoggedin }) {
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+export default function Add({ userInfo }) {
+    const marginCont = { margin: '8px' }
+    const mainStyle = { height: "88vh", width: "100%", overflow: "scroll" }
     const history = useHistory();
+    const [cover, setCever] = React.useState();
     const [values, setValues] = React.useState({
-        name: '',
+        bname: '',
         description: '',
         author: '',
-        originalPrice: '',
-        discountedPrice: '',
+        revision: "",
+        category: "",
+        subcategory: "",
+        publication: "",
         image: "",
-        postedBy: 'Laxman Bhusal'
+        postedBy: `${localStorage.getItem('userName')}`,
     });
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const { name, description, author, originalPrice, discountedPrice, image, postedBy } = values;
-        // const data = {
-        //     name,
-        //     description,
-        //     author,
-        //     originalPrice,
-        //     discountedPrice,
-        //     image,
-        //     postedBy
-        // }
-        const empty = {
-            name: '',
-            description: '',
-            author: "",
-            originalPrice: '',
-            discountedPrice: '',
-            image: '',
-            tegs: [],
-            postedBy: 'Laxman Bhusal'
-        }
-        // await fetch('http://localhost:5000/datas', {
-        //     method: "POST",
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data))
-        //     .catch(err => console.log(err))
-        history.push("/");
-        setValues(empty);
-    }
+        const { bname, description, author, revision, publication, category, subcategory } = values;
+        const uid = userInfo.id
+
+        const formData = new FormData();
+        // formData.append('cover', cover);
+        formData.append('bname', bname);
+        formData.append('description', description);
+        formData.append('author', author);
+        formData.append('revision', revision);
+        formData.append('publication', publication);
+        formData.append('category', category);
+        formData.append('subcategory', subcategory);
+        formData.append('credit', 10);
+        formData.append("user", uid);
+        formData.append('image', cover, cover.image);
+        axios.post('/api/v1/create/book', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                console.log(res);
+                history.push('/profile');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+    };
+
     return (
-        <Box >
+        <Box style={mainStyle}>
             <Box >
-                <AppBarred isLoggedin={isLoggedin} />
-                <Box className="main-content">
-                    <Typography style={{ textAlign: 'center' }} component="h2" variant="subtitle2">
-                        Add a Book:
-                    </Typography>
+                {/* <AppBarred isLoggedin={isLoggedin} /> */}
+                <Container className="main-content" >
                     <Grid
                         container
                         alignContent="center"
                         alignItems="center"
                         justifyContent="center"
                     >
+
                         <form
                             //  method="post" action="/datas"
-                            onSubmit={event => handleSubmit(event)}
+                            onSubmit={event => handleSubmit(event)} style={{ padding: '15px', width: '90%' }}
                         >
-                            <FormControl><TextField
-                                label="Book Name"
-                                variant="outlined"
-                                type="text"
-                                name="name"
-                                required
-                                value={values.name}
-                                onChange={handleChange('name')}
-                                lang="en"
-                                fullWidth
-                                style={{ margin: 8 }}
-                            /></FormControl>
-                            <br />
-                            <FormControl><TextField
-                                label="Author"
-                                variant="outlined"
-                                name="author"
-                                value={values.author}
-                                onChange={handleChange('author')}
-                                type="text"
-                                required
-                                lang="en"
-                                fullWidth
-                                style={{ margin: 8 }}
-                            /></FormControl>
-                            <br />
-
-                            <FormControl><TextField
-                                label="Description"
-                                variant="outlined"
-                                name="description"
-                                value={values.description}
-                                onChange={handleChange('description')}
-                                multiline
-                                fullWidth
-                                rows={3}
-                                type="text"
-                                required
-                                lang="en"
-                                style={{ margin: 8 }}
-                            /></FormControl>
-                            <br />
-                            <FormControl><TextField
-                                label="Original Price"
-                                variant="outlined"
-                                value={values.originalPrice}
-                                onChange={handleChange('originalPrice')}
-                                type="number"
-                                name="originalPrice"
-                                required
-                                lang="en"
-                                fullWidth
-                                style={{ margin: 8 }}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <strong>Rs.</strong>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            /></FormControl>
-                            <br />
-                            <FormControl><TextField
-                                label="Price"
-                                variant="outlined"
-                                type="number"
-                                name="discountedPrice"
-                                required
-                                value={values.discountedPrice}
-                                onChange={handleChange('discountedPrice')}
-                                lang="en"
-                                fullWidth
-                                style={{ margin: 8 }}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <strong>Rs.</strong>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            /></FormControl>
-                            <br />
-                            <Tags />
-
-                            <Typography component="strong" variant="subtitle2" >
-                                Image:
+                            <Typography component="h2" variant="subtitle">
+                                Add a Book:
                             </Typography>
-                            <input
-                                accept="image/*"
-                                name="image"
-                                style={{ display: 'none' }}
-                                id="contained-button-file"
-                                type="file"
-                                value={values.image}
-                                onChange={handleChange('image')}
-                            />
-                            <label htmlFor="contained-button-file">
-                                <Button variant="contained" color="primary" component="span">
-                                    Upload
-        </Button>
-                            </label>
-                            <br />
-                            <br />
-                            {isLoggedin ? <FormControl>
-                                <Button type="submit" color="secondary" variant="outlined">Submit</Button>
-                            </FormControl> : <Container>
-                                    <Button disabled color="secondary" variant="outlined">Submit</Button>
-                                    <Typography component="p" variant="caption">
-                                        Please <Link to={"/login"}> Login </Link>First To Submit</Typography>
-                                </Container>}
+                            {/*  TextField bname ,description,author,category,postedBy,*/}
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="bname"
+                                        label="Book Name"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.bname}
+                                        onChange={handleChange('bname')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="author"
+                                        label="Author"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.author}
+                                        onChange={handleChange('author')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="revision"
+                                        label="Revision"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.revision}
+                                        onChange={handleChange('revision')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="publication"
+                                        label="Publication"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.publication}
+                                        onChange={handleChange('publication')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="description"
+                                        label="Description"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.description}
+                                        onChange={handleChange('description')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="category"
+                                        label="Category"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.category}
+                                        onChange={handleChange('category')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="subcategory"
+                                        label="Sub Category"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={values.subcategory}
+                                        onChange={handleChange('subcategory')}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Typography component="h2" variant="subtitle">
+                                        Image:
+                                    </Typography>
+                                    <TextField
+                                        id="image"
+                                        variant="outlined"
+                                        type={"file"}
+                                        fullWidth
+                                        onChange={e => setCever(e.target.files[0])}
+                                        style={marginCont}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    style={{ marginTop: '10px' }}
+                                >
+                                    Add Book
+                                </Button>
+                            </Grid>
                         </form>
                     </Grid>
-                </Box>
+                </Container>
             </Box>
-            <Navigation />
         </Box>
     );
 }

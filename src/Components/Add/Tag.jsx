@@ -20,7 +20,7 @@ export default function Tags() {
                     ))
                 }
                 renderInput={(params) => (
-                    <TextField {...params} variant="outlined" label="Tags" placeholder="Select Tags" />
+                    <TextField {...params} variant="outlined" label="Tags" fullWidth placeholder="Select Tags" />
                 )}
             />
         </div>

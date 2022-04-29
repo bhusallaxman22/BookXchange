@@ -1,12 +1,12 @@
 import React from 'react';
 // import Navigation from '../Navigation/Navigation';
 import Box from "@mui/material/Box";
-import AppBarred from '../AppBar/AppBarred';
 import { Typography, Grid, TextField, Button, FormControl, InputAdornment } from '@mui/material';
 import { useLocation, useHistory } from 'react-router-dom';
 import EditError from './EditError';
 
 export default function Add({ isLoggedin, props }) {
+    const mainStyle = { height: "88vh", width: "100%", overflow: "scroll" }
     const location = useLocation();
     const history = useHistory();
     const hmmp = location.state
@@ -33,8 +33,8 @@ export default function Add({ isLoggedin, props }) {
 
     return hmmp !== undefined ? < Box >
         <Box >
-            <Box className="main-content">
-                <Typography style={{ textAlign: 'center' }} component="h2" variant="subtitle2">
+            <Box className="main-content" style={mainStyle}>
+                <Typography style={{ textAlign: 'center' }} component="h2" variant="subtitle">
                     Add a Book:
                         </Typography>
                 <Grid

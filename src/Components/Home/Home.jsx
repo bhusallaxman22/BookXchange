@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Select, MenuItem, FormControl, InputLabel, FormHelperText, Container } from '@mui/material';
-import PostedIcon from "@mui/icons-material/PersonOutlineTwoTone";
 import { Pagination } from '@mui/material';
 import Variants from '../Profile/Variant';
 import Divider from '@mui/material/Divider';
@@ -53,7 +52,7 @@ export default function Home({
     const classes = useStyles();
     const [Page, setPage] = React.useState(1);
     const [bookCount, setbookCount] = React.useState(8)
-    const linkStyle = {color:"inherit", textDecoration:"none"}
+    const linkStyle = { color: "inherit", textDecoration: "none" };
     function paginateGood(array, page_size, page_number) {
         // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
         return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -69,7 +68,6 @@ export default function Home({
     }
     const handleCount = (event, value) => {
         setbookCount(event.target.value);
-
     }
     const count = Math.ceil(datas.length / bookCount)
     return (
@@ -105,14 +103,13 @@ export default function Home({
                             justifyContent: 'flex-end',
                             marginRight: '10px'
                         }}>
-                         
                         </Box>
                     </div>
                     <Container>
-                                <Typography variant="h6" component="h6" color={"GrayText"} style={{ textAlign: "center", marginTop: '20px' }}>
-                                    Featured Books
-                                </Typography>
-                            </Container>
+                        <Typography variant="h6" component="h6" color={"GrayText"} style={{ textAlign: "center", marginTop: '20px' }}>
+                            Featured Books
+                        </Typography>
+                    </Container>
                     <Grid
                         container
                         direction="row"
@@ -127,19 +124,19 @@ export default function Home({
                                 <CardActionArea>
                                     <CardMedia
                                         className={classes.media}
-                                        image={`https://picsum.photos/200/300?random=${data.id}`}
-                                        title={data.name}
+                                        image={data.image}
+                                        title={data.bname}
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            {data.name}
+                                            {data.bname}
                                         </Typography>
 
                                         <Typography variant="subtitle1" color="inherit" component="p">
-                                            <small><PostedIcon />Faculty:</small> {data.faculty}
+                                            {/* <small><PostedIcon />Faculty:</small> {data.category} */}
                                         </Typography>
                                         <Typography variant="subtitle2" component="strong" alignContent={"center"}>
-                                            <small > <StarTwoTone/> Credit :</small> <span style={{color:"blue"}}>{data.discountedPrice}</span> 
+                                            <small > <StarTwoTone /> Credit :</small> <span style={{ color: "blue" }}>{data.credit}</span>
                                         </Typography>
                                         <Divider />
                                     </CardContent>
@@ -148,10 +145,10 @@ export default function Home({
                                     <Button size="medium" onClick={() => addToCart(data)} color="primary">
                                         Add To Cart
                                     </Button>
-                                    <Link to={`/book/${data.id}`} style = {linkStyle}>
-                                    <Button size="medium" color="primary">
-                                        Read More<ArrowCircleRightOutlined />
-                                    </Button>
+                                    <Link to={`/book/${data.id}`} style={linkStyle}>
+                                        <Button size="medium" color="primary">
+                                            Read More<ArrowCircleRightOutlined />
+                                        </Button>
                                     </Link>
                                 </CardActions>
                             </Card>
