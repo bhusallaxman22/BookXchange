@@ -6,6 +6,8 @@
 .pnp.js
 /src/Container/firebase.js
 .env
+*.zip
+*.tar.gz
 # testing
 /coverage
 
