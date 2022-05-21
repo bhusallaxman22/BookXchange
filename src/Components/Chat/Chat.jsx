@@ -45,7 +45,7 @@ export default function Chat(props) {
                         </Button>
                     </Toolbar>
                 </AppBar>
-                <iframe src="http://webchat.freenode.net/?channels=#bookXchange" title="Chat" style={{
+                <iframe src="https://webchat.freenode.net/?channels=#bookXchange" title="Chat" style={{
                     border: "0",
                     width: "90%",
                     height: "90vh"
